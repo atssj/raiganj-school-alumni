@@ -6,7 +6,7 @@ import { Reveal } from './common/Reveal';
 import { LoginModal } from './auth/LoginModal';
 import { MOCK_GALLERY } from '../data/gallery';
 import Logo from '../src/components/Logo/Logo';
-import { Hero } from '@/components/sections/hero/Hero';
+import Hero from '@/components/sections/hero/Hero';
 
 interface LandingPageProps {
   onNavigate: (view: ViewState) => void;
@@ -173,12 +173,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin })
       </nav>
 
       <Hero 
-        onLogin={onLogin}
-        scrollToSection={scrollToSection}
-        isLoginModalOpen={isLoginModalOpen}
-        setIsLoginModalOpen={setIsLoginModalOpen}
-        currentView={ViewState.LANDING}
-        onNavigate={onNavigate}
+        onJoinClick={onLogin}
+        onWatchStory={() => scrollToSection('about-section')}
       />
 
       {/* Spirit of Raiganj Section */}

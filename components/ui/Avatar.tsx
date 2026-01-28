@@ -1,0 +1,47 @@
+import * as React from "react"
+import { cn } from "@/lib/utils"
+
+const Avatar = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & {
+    src?: string
+    alt?: string
+    fallback?: React.ReactNode
+  }
+>(({ className, src, alt = "", fallback, ...props }, ref) => {
+  const [imgError, setImgError] = React.useState(false)
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full",
+        className
+      )}
+      {...props}
+    >
+      {src && !imgError ? (
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-cover"
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center rounded-full bg-muted">
+          {fallback || (
+            <span className="text-sm font-medium text-muted-foreground">
+              {alt
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
+            </span>
+          )}
+        </div>
+      )}
+    </div>
+  )
+})
+Avatar.displayName = "Avatar"
+
+export { Avatar }
