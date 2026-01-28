@@ -4,8 +4,9 @@ import { ViewState } from '../types';
 import { ArrowRight, Users, Calendar, Heart, MapPin, X, Facebook, Linkedin, Bird, Clock, GraduationCap, Quote, Menu, Play, Youtube, ChevronDown, HandHeart } from 'lucide-react';
 import { Reveal } from './common/Reveal';
 import { LoginModal } from './auth/LoginModal';
-import { MOCK_GALLERY } from '../data/mocks';
+import { MOCK_GALLERY } from '../data/gallery';
 import Logo from '../src/components/Logo/Logo';
+import { Hero } from '@/components/sections/hero/Hero';
 
 interface LandingPageProps {
   onNavigate: (view: ViewState) => void;
@@ -52,12 +53,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin })
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <div className="flex items-center gap-3 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            <div className="flex items-center gap-4 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-                <Logo width={120} className="h-10" />
+                <Logo width={60} height={60} className="flex-shrink-0" />
                 <div className="flex flex-col">
                     <span className={`font-serif text-lg md:text-xl font-bold tracking-tight leading-none transition-colors ${navTextColor}`}>বিদ্যাচক্র প্রাক্তনী সমিতি</span>
-                    <span className={`text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-medium transition-colors ${logoSubtext}`}>Alumni Network</span>
+                    <span className={`pt-2 text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-medium transition-colors ${logoSubtext}`}>Alumni Network</span>
                 </div>
             </div>
             
@@ -171,188 +172,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin })
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden pt-20 pb-28 md:pb-32">
-        <div className="absolute inset-0 z-0 overflow-hidden">
-             <div className="w-full h-full relative">
-                <img 
-                    src="https://images.unsplash.com/photo-1448375240586-dfd8d395ea6c?q=80&w=2800&auto=format&fit=crop" 
-                    className="w-full h-full object-cover scale-110 animate-float" 
-                    style={{ 
-                        animationDuration: '30s',
-                        animationTimingFunction: 'ease-in-out',
-                        animationIterationCount: 'infinite',
-                        animationDirection: 'alternate'
-                    }}
-                    alt="Forest Path" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-950/80 via-black/40 to-brand-950/90"></div>
-                
-                {/* Animated floating elements */}
-                <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-brand-300/30 animate-float" style={{ animationDuration: '15s', animationDelay: '0s' }}></div>
-                <div className="absolute top-1/3 right-1/3 w-6 h-6 rounded-full bg-brand-200/20 animate-float" style={{ animationDuration: '18s', animationDelay: '2s' }}></div>
-                <div className="absolute bottom-1/4 right-1/4 w-3 h-3 rounded-full bg-white/10 animate-float" style={{ animationDuration: '20s', animationDelay: '1s' }}></div>
-                
-                {/* Animated Lines */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30" xmlns="http://www.w3.org/2000/svg">
-                    {/* Main diagonal line */}
-                    <line 
-                        x1="0" y1="100%" 
-                        x2="100%" y2="0" 
-                        className="stroke-white/30" 
-                        strokeWidth="1"
-                        strokeDasharray="1000"
-                        strokeDashoffset="1000"
-                        style={{ animation: 'draw 3s ease-out forwards 0.5s' }}
-                    />
-                    {/* Horizontal line */}
-                    <line 
-                        x1="10%" y1="60%" 
-                        x2="90%" y2="60%" 
-                        className="stroke-brand-300/40" 
-                        strokeWidth="1"
-                        strokeDasharray="1000"
-                        strokeDashoffset="1000"
-                        style={{ animation: 'draw 2s ease-out forwards 1s' }}
-                    />
-                    {/* Vertical line */}
-                    <line 
-                        x1="50%" y1="20%" 
-                        x2="50%" y2="80%" 
-                        className="stroke-brand-200/30" 
-                        strokeWidth="1"
-                        strokeDasharray="1000"
-                        strokeDashoffset="1000"
-                        style={{ animation: 'draw 2.5s ease-out forwards 0.8s' }}
-                    />
-                </svg>
-             </div>
-        </div>
-
-        <div className="relative z-10 text-center px-4 md:px-6 max-w-5xl mx-auto mt-0 md:mt-16">
-            <Reveal>
-                <div className="relative inline-flex items-center gap-2 mb-6 md:mb-8 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-brand-100 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase shadow-lg hover:scale-105 transition-transform duration-300 hover:bg-white/20 group/location">
-                    <MapPin className="w-3 h-3 animate-pulse" style={{ animationDuration: '4s' }} /> 
-                    <span className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>Raiganj, West Bengal</span>
-                    
-                    {/* Animated line connector */}
-                    <svg className="absolute -right-16 -bottom-8 w-16 h-16 text-white/20" viewBox="0 0 100 100" style={{ transform: 'rotate(45deg)' }}>
-                        <path 
-                            d="M0,50 Q25,25 50,50 T100,50" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            strokeWidth="1"
-                            strokeDasharray="1000"
-                            strokeDashoffset="1000"
-                            className="opacity-0 group-hover/location:opacity-100 transition-opacity duration-1000"
-                            style={{ animation: 'draw 1.5s ease-out forwards 0.3s' }}
-                        />
-                    </svg>
-                </div>
-            </Reveal>
-
-            <Reveal delay={100}>
-                <div className="relative">
-                    <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 md:mb-8 leading-[1.1] tracking-tight">
-                        <span className="inline-block relative">
-                            <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.3s' }}>Rooted in </span>
-                            <span className="text-brand-300 italic font-light animate-float relative inline-block" style={{ animationDelay: '0.4s', animationDuration: '8s' }}>
-                                <span className="relative z-10">History</span>
-                                <svg className="absolute -left-4 -top-4 w-24 h-24 text-brand-300/20" viewBox="0 0 100 100">
-                                    <circle 
-                                        cx="50" 
-                                        cy="50" 
-                                        r="40" 
-                                        fill="none" 
-                                        stroke="currentColor" 
-                                        strokeWidth="1"
-                                        strokeDasharray="1000"
-                                        strokeDashoffset="1000"
-                                        style={{ animation: 'draw 2s ease-out forwards 1.2s' }}
-                                    />
-                                </svg>
-                            </span>
-                            <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.3s' }}>.</span>
-                        </span>
-                        <br className="md:hidden"/>
-                        <span className="inline-block relative">
-                            <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.5s' }}>Connected by </span>
-                            <span className="text-brand-300 italic font-light animate-float relative inline-block" style={{ animationDelay: '0.6s', animationDuration: '8s' }}>
-                                <span className="relative z-10">Heart</span>
-                                <svg className="absolute -left-2 -bottom-2 w-16 h-16 text-brand-300/20" viewBox="0 0 100 100">
-                                    <path 
-                                        d="M20,50 Q50,10 80,50 T140,50" 
-                                        fill="none" 
-                                        stroke="currentColor" 
-                                        strokeWidth="1"
-                                        strokeDasharray="1000"
-                                        strokeDashoffset="1000"
-                                        style={{ animation: 'draw 1.5s ease-out forwards 1.5s' }}
-                                    />
-                                </svg>
-                            </span>
-                            <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.5s' }}>.</span>
-                        </span>
-                    </h1>
-                    
-                    {/* Decorative line elements */}
-                    <div className="absolute -left-20 top-1/4 w-16 h-px bg-gradient-to-r from-transparent to-white/20 animate-expand" style={{ animationDelay: '0.8s' }}></div>
-                    <div className="absolute -right-20 bottom-1/4 w-16 h-px bg-gradient-to-l from-transparent to-white/20 animate-expand" style={{ animationDelay: '1s' }}></div>
-                </div>
-            </Reveal>
-
-            <Reveal delay={200}>
-                <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
-                    Welcome to the official alumni network of Raiganj Heritage School. Reconnect with old friends, share memories, and stay updated with our community events.
-                </p>
-            </Reveal>
-
-            <Reveal delay={300}>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button 
-                        onClick={() => setIsLoginModalOpen(true)}
-                        size="lg"
-                        className="group relative overflow-hidden transform hover:scale-105 transition-transform duration-300 animate-fade-in-up"
-                        style={{ animationDelay: '0.8s' }}
-                    >
-                        <span className="relative z-10 flex items-center">
-                            <span className="group-hover:translate-x-1 transition-transform duration-300">Join Our Network</span>
-                            <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
-                        </span>
-                        <span className="absolute inset-0 bg-gradient-to-r from-brand-500 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-                    </Button>
-                    <Button 
-                        variant="outline" 
-                        size="lg"
-                        className="border-white/20 text-white hover:bg-white/5 hover:border-white/40 group animate-fade-in-up"
-                        onClick={() => scrollToSection('gallery-section')}
-                        style={{ animationDelay: '0.9s' }}
-                    >
-                        <Play className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:scale-110" /> 
-                        <span>Watch Our Story</span>
-                    </Button>
-                </div>
-            </Reveal>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-white/5 backdrop-blur-md">
-            <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
-                <div className="flex justify-center items-center gap-3 md:gap-4 text-sm md:text-base text-white/80">
-                    <div className="flex -space-x-2">
-                        {[1, 2, 3].map((i) => (
-                            <img 
-                                key={i} 
-                                className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white/30 object-cover transition-transform hover:scale-110 hover:z-10 hover:border-brand-300" 
-                                src={`https://picsum.photos/100/100?random=${i + 20}`} 
-                                alt="Alumni" 
-                            />
-                        ))}
-                    </div>
-                    <span className="font-medium"><strong className="text-white font-bold">1,240</strong> alumni joined this month</span>
-                </div>
-            </div>
-        </div>
-      </section>
+      <Hero 
+        onLogin={onLogin}
+        scrollToSection={scrollToSection}
+        isLoginModalOpen={isLoginModalOpen}
+        setIsLoginModalOpen={setIsLoginModalOpen}
+        currentView={ViewState.LANDING}
+        onNavigate={onNavigate}
+      />
 
       {/* Spirit of Raiganj Section */}
       <section id="about-section" className="py-20 md:py-32 bg-white relative">
@@ -369,7 +196,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin })
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <Reveal delay={100} className="md:col-span-2 relative group overflow-hidden rounded-3xl md:rounded-[2.5rem] h-[300px] md:h-[400px]">
-                    <img src="https://images.unsplash.com/photo-1470114716159-e389f87b9610?q=80&w=1600&auto=format&fit=crop" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Kulik Bird Sanctuary" />
+                    <img src="/images/places/kulik-bird-sanctuary.jpg" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Kulik Bird Sanctuary" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 md:p-10 flex flex-col justify-end">
                         <div className="flex items-center gap-3 mb-3">
                             <div className="p-2 bg-white/20 backdrop-blur rounded-lg text-white"><Bird className="w-5 h-5 md:w-6 md:h-6"/></div>
@@ -406,11 +233,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin })
                             Time stands still when old friends meet. Relive the endless political debates, cricket commentary, and tea breaks that defined our youth.
                         </p>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop" className="absolute bottom-0 right-0 w-1/2 h-1/2 object-cover rounded-tl-[2.5rem] opacity-50 group-hover:opacity-100 transition-opacity" alt="Tea" />
+                    <img src="/images/places/tea-shop.jpg" className="absolute bottom-0 right-0 w-1/2 h-1/2 object-cover rounded-tl-[2.5rem] opacity-50 group-hover:opacity-100 transition-opacity" alt="Tea Shop" />
                 </Reveal>
 
                 <Reveal delay={400} className="md:col-span-2 relative group overflow-hidden rounded-3xl md:rounded-[2.5rem] h-[300px] md:h-[400px]">
-                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1600&auto=format&fit=crop" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Community" />
+                    <img src="/images/places/community.jpg" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Community" />
                      <div className="absolute inset-0 bg-brand-950/40 p-6 md:p-10 flex flex-col justify-center items-center text-center hover:bg-brand-950/50 transition-colors">
                         <Quote className="w-10 h-10 md:w-12 md:h-12 text-white mb-4 md:mb-6 opacity-80" />
                         <h3 className="text-2xl md:text-4xl font-serif font-bold text-white mb-4 md:mb-6 leading-tight">
@@ -509,8 +336,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin })
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-brand-900 pb-16">
                 <div className="md:col-span-5">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-brand-900 font-serif font-bold text-xl">V</div>
-                        <span className="font-serif text-2xl font-bold text-white tracking-tight">রায়গঞ্জ বিদ্যাচক্র উচ্চবিদ্যালয়</span>
+                        <Logo width={40} height={40} className="flex-shrink-0" />
+                        <span className="font-serif text-2xl font-bold text-white tracking-tight">বিদ্যাচক্র প্রাক্তনী সমিতি</span>
                     </div>
                     <p className="text-brand-200/80 max-w-sm leading-relaxed mb-8 text-sm">
                         Empowering minds since 1952. Nurturing excellence in education and character building in the heart of North Dinajpur.
@@ -543,7 +370,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin })
                     <ul className="space-y-4 text-brand-200/80 text-sm">
                         <li className="flex items-start gap-3">
                             <MapPin className="w-5 h-5 text-brand-400 mt-0.5 flex-shrink-0"/> 
-                            <span>College Para Main Road,<br/>Raiganj, North Dinajpur<br/>West Bengal - 733134</span>
+                            <span>Raiganj Vidya Chakra School,<br/>Raiganj, North Dinajpur<br/>West Bengal - 733134</span>
                         </li>
                         <li className="flex items-start gap-3">
                             <div className="w-5 h-5 flex items-center justify-center text-brand-400">@</div>
@@ -563,7 +390,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin })
             </div>
             
             <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-brand-300/60 text-sm text-center md:text-left">
-                <p>&copy; {new Date().getFullYear()} Raiganj Vidya Chakya High School. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} রায়গঞ্জ বিদ্যাচক্র প্রাক্তনী সমিতি. All rights reserved.</p>
                 <div className="flex gap-8">
                     <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
                     <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
