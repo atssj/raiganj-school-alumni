@@ -122,9 +122,10 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="hidden md:flex items-center gap-4">
             <Button
               onClick={onLoginClick}
-              variant={isScrolled ? 'primary' : 'white'}
               className={`rounded-full px-6 transition-all duration-300 border-none ${
-                isScrolled ? 'bg-brand-950 hover:bg-black' : ''
+                isScrolled 
+                  ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-600/20' 
+                  : 'bg-brand-500 hover:bg-brand-600 text-white shadow-lg shadow-brand-900/30'
               }`}
             >
               Join Network
@@ -173,7 +174,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onLoginClick();
                 onMobileMenuClose();
               }}
-              className="w-full justify-center"
+              className="w-full justify-center bg-brand-600 hover:bg-brand-700 text-white shadow-md shadow-brand-600/20"
             >
               Join Network
             </Button>

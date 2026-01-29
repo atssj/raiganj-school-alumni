@@ -15,7 +15,7 @@ import {
   Shield,
 } from 'lucide-react';
 import { ViewState, AlumniProfile } from '../../../shared/types';
-import { Logo } from '../../../shared/components';
+import { Logo, Button } from '../../../shared/components';
 
 interface SidebarProps {
   currentView: ViewState;
@@ -48,14 +48,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
     const isActive = view === currentView;
     return (
       <div className="relative group">
-        <button
+        <Button
           onClick={onClick ? onClick : () => view && onChangeView(view)}
-          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 group-hover:bg-gray-50 ${
+          variant={isActive ? 'default' : isDanger ? 'destructive' : 'ghost'}
+          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 justify-start ${
             isActive
               ? 'bg-gray-100 text-gray-900 font-semibold shadow-sm'
               : isDanger 
                 ? 'text-rose-600 hover:bg-rose-50 hover:text-rose-700'
-                : 'text-gray-600 hover:text-gray-900 font-medium'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-medium'
           } ${isCollapsed ? 'justify-center' : ''}`}
         >
           <Icon
@@ -64,7 +65,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             } ${isCollapsed ? 'w-5 h-5' : 'w-4.5 h-4.5'}`}
           />
           {!isCollapsed && <span className="truncate tracking-tight">{label}</span>}
-        </button>
+        </Button>
         
         {/* Tooltip for collapsed mode */}
         {isCollapsed && (

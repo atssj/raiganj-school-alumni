@@ -30,12 +30,14 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
         className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-scale-up"
         onClick={e => e.stopPropagation()}
       >
-        <button
+        <Button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors z-10"
+          variant="ghost"
+          size="icon"
+          className="absolute top-4 right-4 rounded-full hover:bg-gray-100 z-10"
         >
           <X className="w-5 h-5 text-gray-500" />
-        </button>
+        </Button>
 
         <div className="p-6 md:p-8">
           <Header />
@@ -98,15 +100,16 @@ interface SocialButtonProps {
 
 const SocialButton: React.FC<SocialButtonProps> = ({ onClick, icon, label, variant }) => {
   const variants = {
-    white: 'bg-white border-gray-200 hover:bg-gray-50 hover:border-gray-300 text-gray-700',
-    facebook: 'bg-[#1877F2] hover:bg-[#1864D9] text-white',
-    linkedin: 'bg-[#0A66C2] hover:bg-[#004182] text-white',
+    white: 'bg-white border border-gray-200 hover:bg-gray-50 hover:border-gray-300 text-gray-700',
+    facebook: 'bg-[#1877F2] hover:bg-[#1864D9] text-white border-0',
+    linkedin: 'bg-[#0A66C2] hover:bg-[#004182] text-white border-0',
   };
 
   return (
-    <button
+    <Button
       onClick={onClick}
-      className={`w-full flex items-center justify-center gap-3 p-2.5 rounded-xl transition-all group ${variants[variant]}`}
+      className={`w-full flex items-center justify-center gap-3 rounded-xl ${variants[variant]}`}
+      variant="outline"
     >
       {typeof icon === 'string' ? (
         <img src={icon} className="w-5 h-5" alt="" />
@@ -114,7 +117,7 @@ const SocialButton: React.FC<SocialButtonProps> = ({ onClick, icon, label, varia
         icon
       )}
       <span className="font-medium text-sm">{label}</span>
-    </button>
+    </Button>
   );
 };
 
@@ -191,13 +194,14 @@ const OtpStep: React.FC<OtpStepProps> = ({ email, otp, isLoading, onOtpChange, o
         <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">
           Enter Code
         </label>
-        <button
+        <Button
           type="button"
           onClick={onChangeEmail}
-          className="text-xs text-brand-600 font-medium hover:underline"
+          variant="link"
+          className="text-xs text-brand-600 font-medium p-0 h-auto"
         >
           Change email
-        </button>
+        </Button>
       </div>
       <p className="text-xs text-gray-400 mb-3">
         We sent a 6-digit code to <span className="text-gray-900 font-medium">{email}</span>
@@ -219,9 +223,9 @@ const OtpStep: React.FC<OtpStepProps> = ({ email, otp, isLoading, onOtpChange, o
       {isLoading ? <Loader className="w-4 h-4 animate-spin" /> : 'Verify & Sign In'}
     </Button>
     <div className="text-center">
-      <button type="button" className="text-xs text-gray-400 hover:text-gray-600 transition-colors">
+      <Button type="button" variant="link" className="text-xs text-gray-400 hover:text-gray-600 p-0 h-auto">
         Didn&apos;t receive code? Resend
-      </button>
+      </Button>
     </div>
   </form>
 );
