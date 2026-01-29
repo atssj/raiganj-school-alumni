@@ -8,8 +8,12 @@ export const HeroStats: React.FC<HeroStatsProps> = ({
   monthlyJoins
 }) => {
   return (
-    <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-white/5 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
+    <div
+      className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: 'url(/images/hero/hero-stats-bg.jpg)' }}
+    >
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
         <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-6 text-white/80">
 
           {/* Monthly Joins */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, X, ChevronDown, Heart, HandHeart, Landmark, Image, BookOpen, Calendar } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { ViewState } from '../../../shared/types';
 import { Button, Logo } from '../../../shared/components';
 import { useScrollHeader } from '../../../shared/hooks';
@@ -74,28 +74,24 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="hidden md:flex items-center gap-8 lg:gap-10">
             <NavDropdown
               label="Vision & Mission"
-              icon={Landmark}
               navTextColor={navTextColor}
               navHoverColor={navHoverColor}
               onClick={() => onNavigate(ViewState.ABOUT)}
             />
             <NavDropdown
               label="Gallery"
-              icon={Image}
               navTextColor={navTextColor}
               navHoverColor={navHoverColor}
               onClick={() => scrollToSection('gallery-section')}
             />
             <NavDropdown
               label="Stories"
-              icon={BookOpen}
               navTextColor={navTextColor}
               navHoverColor={navHoverColor}
               onClick={() => onNavigate(ViewState.STORIES)}
             />
             <NavDropdown
               label="Events"
-              icon={Calendar}
               navTextColor={navTextColor}
               navHoverColor={navHoverColor}
               onClick={() => onNavigate(ViewState.EVENTS)}
@@ -111,10 +107,10 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
               <div className="absolute top-full right-0 pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50">
                 <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden p-1.5 ring-1 ring-black/5">
-                  <DropdownItem icon={Heart} onClick={() => onNavigate(ViewState.DONATE)}>
+                  <DropdownItem onClick={() => onNavigate(ViewState.DONATE)}>
                     Donate
                   </DropdownItem>
-                  <DropdownItem icon={HandHeart} onClick={() => onNavigate(ViewState.VOLUNTEER)}>
+                  <DropdownItem onClick={() => onNavigate(ViewState.VOLUNTEER)}>
                     Volunteer
                   </DropdownItem>
                 </div>
@@ -162,10 +158,10 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">
               Engage
             </span>
-            <MobileEngageLink icon={Heart} onClick={() => handleNavigate(ViewState.DONATE)}>
+            <MobileEngageLink onClick={() => handleNavigate(ViewState.DONATE)}>
               Donate
             </MobileEngageLink>
-            <MobileEngageLink icon={HandHeart} onClick={() => handleNavigate(ViewState.VOLUNTEER)}>
+            <MobileEngageLink onClick={() => handleNavigate(ViewState.VOLUNTEER)}>
               Volunteer
             </MobileEngageLink>
           </div>
@@ -191,7 +187,6 @@ export const Header: React.FC<HeaderProps> = ({
 // Sub-components
 interface NavDropdownProps {
   label: string;
-  icon: React.ElementType;
   navTextColor: string;
   navHoverColor: string;
   onClick: () => void;
@@ -200,7 +195,6 @@ interface NavDropdownProps {
 
 const NavDropdown: React.FC<NavDropdownProps> = ({
   label,
-  icon: Icon,
   navTextColor,
   navHoverColor,
   onClick,
@@ -210,7 +204,6 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
     onClick={onClick}
     className={`flex items-center gap-1.5 text-sm font-medium transition-colors py-2 ${navTextColor} ${navHoverColor} group`}
   >
-    <Icon className="w-4 h-4" />
     {label}
     {hasDropdown && (
       <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 opacity-70" />
@@ -219,17 +212,16 @@ const NavDropdown: React.FC<NavDropdownProps> = ({
 );
 
 interface DropdownItemProps {
-  icon: React.ElementType;
   onClick: () => void;
   children: React.ReactNode;
 }
 
-const DropdownItem: React.FC<DropdownItemProps> = ({ icon: Icon, onClick, children }) => (
+const DropdownItem: React.FC<DropdownItemProps> = ({ onClick, children }) => (
   <button
     onClick={onClick}
-    className="w-full text-left px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-brand-600 rounded-lg transition-colors flex items-center gap-3"
+    className="w-full text-left px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-brand-600 rounded-lg transition-colors"
   >
-    <Icon className="w-4 h-4 text-brand-500" /> {children}
+    {children}
   </button>
 );
 
@@ -248,16 +240,15 @@ const MobileNavLink: React.FC<MobileNavLinkProps> = ({ onClick, children }) => (
 );
 
 interface MobileEngageLinkProps {
-  icon: React.ElementType;
   onClick: () => void;
   children: React.ReactNode;
 }
 
-const MobileEngageLink: React.FC<MobileEngageLinkProps> = ({ icon: Icon, onClick, children }) => (
+const MobileEngageLink: React.FC<MobileEngageLinkProps> = ({ onClick, children }) => (
   <button
     onClick={onClick}
-    className="text-left w-full py-2 font-serif text-xl font-medium text-gray-900 flex items-center gap-3"
+    className="text-left w-full py-2 font-serif text-xl font-medium text-gray-900"
   >
-    <Icon className="w-5 h-5 text-brand-500" /> {children}
+    {children}
   </button>
 );
