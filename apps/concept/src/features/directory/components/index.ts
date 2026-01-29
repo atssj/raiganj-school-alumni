@@ -1,0 +1,1 @@
+export { AlumniCard } from './AlumniCard';
