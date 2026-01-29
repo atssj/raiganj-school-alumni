@@ -4,7 +4,7 @@ import { Reveal } from '@/components/common/Reveal';
 export const HeroTitle: React.FC = () => {
   return (
     <Reveal delay={100}>
-      <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 md:mb-8 leading-[1.1] tracking-tight">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-[0.9] tracking-tight -ml-2 md:-ml-8">
         <span className="inline-block relative">
           <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.3s' }}>Rooted in </span>
           <span className="text-brand-300 italic font-light animate-float relative inline-block" style={{ animationDelay: '0.4s', animationDuration: '8s' }}>
@@ -45,8 +45,6 @@ export const HeroTitle: React.FC = () => {
           <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.5s' }}>.</span>
         </span>
       </h1>
-      <div className="absolute -left-20 top-1/4 w-16 h-px bg-gradient-to-r from-transparent to-white/20 animate-expand" style={{ animationDelay: '0.8s' }} />
-      <div className="absolute -right-20 bottom-1/4 w-16 h-px bg-gradient-to-l from-transparent to-white/20 animate-expand" style={{ animationDelay: '1s' }} />
     </Reveal>
   );
 };
