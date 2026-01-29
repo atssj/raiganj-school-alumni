@@ -17,6 +17,16 @@ const Donate = React.lazy(() => import('../donation/Donate').then(m => ({ defaul
 const Volunteer = React.lazy(() => import('../volunteer/Volunteer').then(m => ({ default: m.Volunteer })));
 const Profile = React.lazy(() => import('../profile/Profile').then(m => ({ default: m.Profile })));
 const About = React.lazy(() => import('../about/About').then(m => ({ default: m.About })));
+const Admin = React.lazy(() => import('../admin/Admin').then(m => ({ default: m.Admin })));
+const DonationWorkReports = React.lazy(() =>
+  import('../admin/DonationWorkReports').then(m => ({ default: m.DonationWorkReports }))
+);
+const AdminMembers = React.lazy(() =>
+  import('../admin/AdminMembers').then(m => ({ default: m.AdminMembers }))
+);
+const AdminEvents = React.lazy(() =>
+  import('../admin/AdminEvents').then(m => ({ default: m.AdminEvents }))
+);
 
 interface DashboardProps {
   currentView: ViewState;
@@ -60,6 +70,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
         return <Profile user={currentUser} onUpdate={onUpdateUser} />;
       case ViewState.ABOUT:
         return <About />;
+      case ViewState.ADMIN:
+        return <Admin onChangeView={onChangeView} />;
+      case ViewState.ADMIN_DONATION_WORK:
+        return <DonationWorkReports />;
+      case ViewState.ADMIN_MEMBERS:
+        return <AdminMembers />;
+      case ViewState.ADMIN_EVENTS:
+        return <AdminEvents />;
       default:
         return <Overview currentUser={currentUser} onChangeView={onChangeView} />;
     }

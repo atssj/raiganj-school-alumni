@@ -12,6 +12,7 @@ import {
   HandHeart,
   Image,
   Landmark,
+  Shield,
 } from 'lucide-react';
 import { ViewState, AlumniProfile } from '../../../shared/types';
 import { Logo } from '../../../shared/components';
@@ -124,6 +125,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
            <SectionHeader label="Institute" />
            <NavItem view={ViewState.ABOUT} icon={Landmark} label="About & Vision" />
+
+           <SectionHeader label="Administration" />
+           <NavItem view={ViewState.ADMIN} icon={Shield} label="Admin Dashboard" />
         </div>
 
         {/* Footer / Profile Area */}

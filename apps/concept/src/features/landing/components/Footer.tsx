@@ -107,8 +107,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onLoginClick }) => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-brand-300/60 text-sm text-center md:text-left">
           <p className="font-bengali">
-            © {currentYear} রায়গঞ্জ বিদ্যাচক্র প্রাক্তনী সমিতি{" "}
-            <span className="font-sans">Alumni Association</span>.
+            &copy; {currentYear} রায়গঞ্জ বিদ্যাচক্র প্রাক্তনী সমিতি
           </p>
           <div className="flex gap-8">
             <a href="#" className="hover:text-white transition-colors">
