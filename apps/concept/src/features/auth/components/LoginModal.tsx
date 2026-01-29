@@ -65,9 +65,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
 // Sub-components
 const Header: React.FC = () => (
   <div className="text-center mb-6">
-    <div className="mx-auto mb-4">
-      <Logo size="lg" />
-    </div>
+    <Logo size="xl" className="mx-auto mb-4" />
     <h3 className="text-2xl font-serif font-bold text-gray-900">Welcome Back</h3>
     <p className="text-gray-500 mt-2 text-sm">Sign in to reconnect with your roots.</p>
   </div>

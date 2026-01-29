@@ -55,16 +55,20 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onLogin
                 </button>
 
                 <div className="p-6 md:p-8">
+                    <div className="full-width text-center">
+                        <Logo size="lg" />
+                    </div>
                     <div className="flex flex-col items-center justify-center mb-6">
-                        <Logo size="lg" className="mb-4" />
                         <h3 className="text-2xl font-serif font-bold text-gray-900">Welcome Back</h3>
                         <p className="text-gray-500 mt-2 text-sm">Sign in to reconnect with your roots.</p>
                     </div>
 
                     <div className="space-y-3">
-                        <button onClick={onLogin} className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 p-2.5 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all group">
-                             <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-5 h-5" alt="Google" />
-                            <span className="font-medium text-gray-700 text-sm">Continue with Google</span>
+                        <button onClick={onLogin} className="w-full flex items-center justify-center gap-3 bg-[#4285F4] text-white p-2.5 rounded-xl hover:bg-[#357ABD] transition-all group">
+                             <div className="p-0.5 bg-white rounded-full flex items-center justify-center">
+                                <img src="/google.svg" className="w-4 h-4" alt="Google" />
+                             </div>
+                            <span className="font-medium text-sm">Continue with Google</span>
                         </button>
                         <button onClick={onLogin} className="w-full flex items-center justify-center gap-3 bg-[#1877F2] text-white p-2.5 rounded-xl hover:bg-[#1864D9] transition-all">
                             <Facebook className="w-5 h-5 fill-current" />

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ViewState, AlumniProfile } from '../../types';
+import { Logo } from '../../src/shared/components/Logo';
 import { Home, Users, Calendar, Sparkles, LogOut, CreditCard, BookOpen, UserCircle, Heart, HandHeart, Image, Landmark } from 'lucide-react';
 
 interface SidebarProps {
@@ -29,9 +30,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onChangeView, cur
     return (
         <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 fixed h-full z-20 overflow-y-auto scrollbar-hide">
             <div className="p-6 pb-0">
-                <div className="flex items-center space-x-3 mb-8 cursor-pointer" onClick={() => onChangeView(ViewState.DASHBOARD_HOME)}>
-                    <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-serif font-bold text-xl shadow-sm">R</div>
-                    <span className="font-serif text-lg font-bold text-gray-900 tracking-tight">রায়গঞ্জ বিদ্যাচক্র প্রাক্তনী সমিতি</span>
+                <div className="flex items-center gap-3 mb-8 cursor-pointer group" onClick={() => onChangeView(ViewState.DASHBOARD_HOME)}>
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-brand-100 rounded-full blur-sm opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                        <Logo size="md" className="relative drop-shadow-sm" />
+                    </div>
+                    <div className="flex flex-col">
+                        <span className="font-serif text-[15px] font-bold text-gray-900 leading-tight">রায়গঞ্জ বিদ্যাচক্র<br/>প্রাক্তনী সমিতি</span>
+                        <span className="text-[10px] font-bold text-brand-600 uppercase tracking-widest mt-0.5 group-hover:text-brand-700 transition-colors">Alumni Network</span>
+                    </div>
                 </div>
             </div>
             

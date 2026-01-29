@@ -52,7 +52,10 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-3 cursor-pointer group"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <Logo size={isScrolled ? 'lg' : '3xl'} />
+            <Logo 
+              size={isScrolled ? 'lg' : 'xl'} 
+              className={!isScrolled ? 'md:!w-24 md:!h-24 transition-all duration-300' : 'transition-all duration-300'} 
+            />
             <div className="flex flex-col">
               <span
                 className={`font-bengali text-lg md:text-xl font-bold tracking-tight leading-none transition-colors ${navTextColor}`}
