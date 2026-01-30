@@ -14,24 +14,43 @@ const DEFAULT_USER: AlumniProfile = {
 
 export const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [currentView, setCurrentView] = useState<ViewState>(ViewState.LANDING);
   const [dashboardView, setDashboardView] = useState<ViewState>(ViewState.DASHBOARD_HOME);
   const [currentUser, setCurrentUser] = useState<AlumniProfile>(DEFAULT_USER);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
+    setIsAdmin(false);
     setCurrentView(ViewState.DASHBOARD_HOME);
     setDashboardView(ViewState.DASHBOARD_HOME);
   };
 
+  const handleAdminLogin = () => {
+    setIsLoggedIn(true);
+    setIsAdmin(true);
+    setCurrentView(ViewState.ADMIN);
+    setDashboardView(ViewState.ADMIN);
+  };
+
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setIsAdmin(false);
     setCurrentView(ViewState.LANDING);
     setDashboardView(ViewState.DASHBOARD_HOME);
   };
 
   const handleNavigate = (view: ViewState) => {
-    setIsLoggedIn(true);
+    if (view === ViewState.ADMIN_LOGIN) {
+      handleAdminLogin();
+      return;
+    }
+
+    if (!isLoggedIn) {
+      setIsLoggedIn(true);
+      setIsAdmin(false);
+    }
+
     setDashboardView(view);
     setCurrentView(view);
   };
@@ -41,7 +60,9 @@ export const App: React.FC = () => {
   };
 
   if (!isLoggedIn) {
-    return <LandingPage onNavigate={handleNavigate} onLogin={handleLogin} />;
+    return (
+      <LandingPage onNavigate={handleNavigate} onLogin={handleLogin} onAdminLogin={handleAdminLogin} />
+    );
   }
 
   return (
@@ -51,6 +72,7 @@ export const App: React.FC = () => {
       onLogout={handleLogout}
       currentUser={currentUser}
       onUpdateUser={handleUpdateUser}
+      isAdmin={isAdmin}
     />
   );
 };

@@ -34,6 +34,7 @@ interface DashboardProps {
   onLogout: () => void;
   currentUser: AlumniProfile;
   onUpdateUser: (user: AlumniProfile) => void;
+  isAdmin: boolean;
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({
@@ -42,11 +43,27 @@ export const Dashboard: React.FC<DashboardProps> = ({
   onLogout,
   currentUser,
   onUpdateUser,
+  isAdmin,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const renderView = () => {
+    if (isAdmin) {
+      switch (currentView) {
+        case ViewState.ADMIN:
+          return <Admin onChangeView={onChangeView} />;
+        case ViewState.ADMIN_DONATION_WORK:
+          return <DonationWorkReports />;
+        case ViewState.ADMIN_MEMBERS:
+          return <AdminMembers />;
+        case ViewState.ADMIN_EVENTS:
+          return <AdminEvents />;
+        default:
+          return <Admin onChangeView={onChangeView} />;
+      }
+    }
+
     switch (currentView) {
       case ViewState.DASHBOARD_HOME:
         return <Overview currentUser={currentUser} onChangeView={onChangeView} />;
@@ -70,14 +87,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
         return <Profile user={currentUser} onUpdate={onUpdateUser} />;
       case ViewState.ABOUT:
         return <About />;
-      case ViewState.ADMIN:
-        return <Admin onChangeView={onChangeView} />;
-      case ViewState.ADMIN_DONATION_WORK:
-        return <DonationWorkReports />;
-      case ViewState.ADMIN_MEMBERS:
-        return <AdminMembers />;
-      case ViewState.ADMIN_EVENTS:
-        return <AdminEvents />;
       default:
         return <Overview currentUser={currentUser} onChangeView={onChangeView} />;
     }
@@ -91,6 +100,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         currentUser={currentUser}
         onLogout={onLogout}
         isCollapsed={isSidebarCollapsed}
+        isAdmin={isAdmin}
       />
 
       <MobileHeader isMenuOpen={isMobileMenuOpen} onMenuToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
@@ -101,6 +111,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         onLogout={onLogout}
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
+        isAdmin={isAdmin}
       />
 
       <main 

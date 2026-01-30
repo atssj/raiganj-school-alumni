@@ -3,16 +3,12 @@ import {
   Home,
   Users,
   Calendar,
-  Sparkles,
   LogOut,
   CreditCard,
-  BookOpen,
   UserCircle,
   Heart,
   HandHeart,
   Image,
-  Landmark,
-  Shield,
 } from 'lucide-react';
 import { ViewState, AlumniProfile } from '../../../shared/types';
 import { Logo, Button } from '../../../shared/components';
@@ -23,6 +19,7 @@ interface SidebarProps {
   currentUser: AlumniProfile;
   onLogout: () => void;
   isCollapsed: boolean;
+  isAdmin: boolean;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -31,6 +28,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   currentUser,
   onLogout,
   isCollapsed,
+  isAdmin,
 }) => {
   const NavItem = ({
     view,
@@ -108,37 +106,43 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Scrollable Nav Area */}
         <div className="flex-1 overflow-y-auto scrollbar-hide py-2 px-3 space-y-0.5">
-           <NavItem view={ViewState.DASHBOARD_HOME} icon={Home} label="Overview" />
-           
-           <SectionHeader label="Community" />
-           <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
-           <NavItem view={ViewState.MEMBERSHIP} icon={CreditCard} label="Membership" />
-           <NavItem view={ViewState.AI_ASSISTANT} icon={Sparkles} label="AI Ice Breaker" />
+          <NavItem
+            view={isAdmin ? ViewState.ADMIN : ViewState.DASHBOARD_HOME}
+            icon={Home}
+            label="Overview"
+          />
 
-           <SectionHeader label="Campus Life" />
-           <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events & Reunions" />
-           <NavItem view={ViewState.STORIES} icon={BookOpen} label="Stories" />
-           <NavItem view={ViewState.GALLERY} icon={Image} label="Gallery & Archive" />
+          {isAdmin ? (
+            <>
+              <SectionHeader label="Administration" />
+              <NavItem view={ViewState.ADMIN_MEMBERS} icon={Users} label="Member Management" />
+              <NavItem view={ViewState.ADMIN_DONATION_WORK} icon={Heart} label="Donation Reports" />
+              <NavItem view={ViewState.ADMIN_EVENTS} icon={Calendar} label="Event Management" />
+              <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
+              <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events & Reunions" />
+              <NavItem view={ViewState.GALLERY} icon={Image} label="Gallery & Archive" />
+              <NavItem view={ViewState.DONATE} icon={HandHeart} label="Donations" />
+            </>
+          ) : (
+            <>
+              <SectionHeader label="Community" />
+              <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
+              <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events" />
 
-           <SectionHeader label="Impact" />
-           <NavItem view={ViewState.DONATE} icon={Heart} label="Donate" />
-           <NavItem view={ViewState.VOLUNTEER} icon={HandHeart} label="Volunteer" />
-
-           <SectionHeader label="Institute" />
-           <NavItem view={ViewState.ABOUT} icon={Landmark} label="About & Vision" />
-
-           <SectionHeader label="Administration" />
-           <NavItem view={ViewState.ADMIN} icon={Shield} label="Admin Dashboard" />
+              <SectionHeader label="Personal" />
+              <NavItem view={ViewState.PROFILE} icon={UserCircle} label="My Profile" />
+              <NavItem view={ViewState.MEMBERSHIP} icon={CreditCard} label="Membership" />
+            </>
+          )}
         </div>
 
         {/* Footer / Profile Area */}
         <div className="p-3 border-t border-gray-100 bg-white">
            <div className="space-y-0.5 mb-3">
-             <NavItem view={ViewState.PROFILE} icon={UserCircle} label="My Profile" />
-             <NavItem icon={LogOut} label="Sign Out" isDanger onClick={onLogout} />
+             <NavItem icon={LogOut} label="Sign Out" onClick={onLogout} />
            </div>
 
-           {!isCollapsed && (
+           {!isCollapsed && !isAdmin && (
              <div className="flex items-center gap-3 px-2 py-2 rounded-lg bg-gray-50 border border-gray-100">
                <img
                  src={currentUser.avatar}
@@ -151,8 +155,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                </div>
              </div>
            )}
-           
-           {isCollapsed && (
+
+           {isCollapsed && !isAdmin && (
              <div className="flex justify-center pt-2 border-t border-gray-100">
                 <img
                  src={currentUser.avatar}

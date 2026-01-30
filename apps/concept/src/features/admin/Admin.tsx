@@ -24,28 +24,35 @@ export const Admin: React.FC<AdminProps> = ({ onChangeView }) => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard
-          title="Total Donations"
-          value={`₹${stats.totalDonations.toLocaleString()}`}
-          change="+12% from last year"
-          trend="up"
-        />
-        <StatCard
-          title="Total Projects"
-          value={stats.totalProjects.toString()}
-          subtitle={`${stats.completedProjects} completed, ${stats.pendingProjects} pending`}
-        />
-        <StatCard
-          title="Beneficiaries"
-          value={stats.beneficiariesHelped.toString()}
-          change="People helped"
-        />
-        <StatCard
-          title="Available Funds"
-          value={`₹${(stats.totalDonations - stats.totalSpent).toLocaleString()}`}
-          change={`${Math.round(((stats.totalDonations - stats.totalSpent) / stats.totalDonations) * 100)}% remaining`}
-        />
+      <div className="grid grid-cols-2 gap-4">
+        {/* Column 1 */}
+        <div className="space-y-4">
+          <StatCard
+            title="Total Donations"
+            value={`₹${stats.totalDonations.toLocaleString()}`}
+            change="+12% from last year"
+            trend="up"
+          />
+          <StatCard
+            title="Available Funds"
+            value={`₹${(stats.totalDonations - stats.totalSpent).toLocaleString()}`}
+            change={`${Math.round(((stats.totalDonations - stats.totalSpent) / stats.totalDonations) * 100)}% remaining`}
+          />
+        </div>
+
+        {/* Column 2 */}
+        <div className="space-y-4">
+          <StatCard
+            title="Beneficiaries"
+            value={stats.beneficiariesHelped.toString()}
+            change="People helped"
+          />
+          <StatCard
+            title="Total Projects"
+            value={stats.totalProjects.toString()}
+            subtitle={`${stats.completedProjects} completed, ${stats.pendingProjects} pending`}
+          />
+        </div>
       </div>
 
       {/* Quick Actions */}

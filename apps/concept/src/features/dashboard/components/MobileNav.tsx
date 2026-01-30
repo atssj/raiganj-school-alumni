@@ -3,15 +3,12 @@ import {
   Home,
   Users,
   Calendar,
-  Sparkles,
   LogOut,
   CreditCard,
-  BookOpen,
-  UserCircle,
   Heart,
   HandHeart,
   Image,
-  Landmark,
+  UserCircle,
 } from 'lucide-react';
 import { ViewState } from '../../../shared/types';
 
@@ -21,6 +18,7 @@ interface MobileNavProps {
   onLogout: () => void;
   isOpen: boolean;
   onClose: () => void;
+  isAdmin: boolean;
 }
 
 export const MobileNav: React.FC<MobileNavProps> = ({
@@ -29,6 +27,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
   onLogout,
   isOpen,
   onClose,
+  isAdmin,
 }) => {
   const NavItem = ({
     view,
@@ -65,46 +64,50 @@ export const MobileNav: React.FC<MobileNavProps> = ({
       <div className="absolute top-0 right-0 w-[80%] max-w-sm h-full bg-white shadow-2xl flex flex-col pt-16 animate-fade-in">
         <div className="flex-1 overflow-y-auto p-4">
           <nav className="space-y-1">
-            <NavItem view={ViewState.DASHBOARD_HOME} icon={Home} label="Overview" />
+            <NavItem
+              view={isAdmin ? ViewState.ADMIN : ViewState.DASHBOARD_HOME}
+              icon={Home}
+              label="Overview"
+            />
 
-            <div className="pt-6 pb-2 px-4">
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                The Institute
-              </p>
-            </div>
-            <NavItem view={ViewState.ABOUT} icon={Landmark} label="About & Vision" />
+            {isAdmin ? (
+              <>
+                <div className="pt-6 pb-2 px-4">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    Administration
+                  </p>
+                </div>
+                <NavItem view={ViewState.ADMIN_MEMBERS} icon={Users} label="Member Management" />
+                <NavItem view={ViewState.ADMIN_DONATION_WORK} icon={Heart} label="Donation Reports" />
+                <NavItem view={ViewState.ADMIN_EVENTS} icon={Calendar} label="Event Management" />
+                <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
+                <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events & Reunions" />
+                <NavItem view={ViewState.GALLERY} icon={Image} label="Gallery & Archive" />
+                <NavItem view={ViewState.DONATE} icon={HandHeart} label="Donations" />
+              </>
+            ) : (
+              <>
+                <div className="pt-6 pb-2 px-4">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    Community
+                  </p>
+                </div>
+                <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
+                <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events" />
 
-            <div className="pt-6 pb-2 px-4">
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Connect</p>
-            </div>
-            <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
-            <NavItem view={ViewState.AI_ASSISTANT} icon={Sparkles} label="AI Ice Breaker" />
-
-            <div className="pt-6 pb-2 px-4">
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                Campus Life
-              </p>
-            </div>
-            <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events & Reunions" />
-            <NavItem view={ViewState.STORIES} icon={BookOpen} label="Stories" />
-            <NavItem view={ViewState.GALLERY} icon={Image} label="Gallery & Archive" />
-
-            <div className="pt-6 pb-2 px-4">
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Support</p>
-            </div>
-            <NavItem view={ViewState.MEMBERSHIP} icon={CreditCard} label="Membership" />
-            <NavItem view={ViewState.DONATE} icon={Heart} label="Donate" />
-            <NavItem view={ViewState.VOLUNTEER} icon={HandHeart} label="Volunteer" />
-
-            <div className="pt-6 pb-2 border-t border-gray-100 mt-4">
-              <NavItem view={ViewState.PROFILE} icon={UserCircle} label="My Profile" />
-            </div>
+                <div className="pt-6 pb-2 px-4">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Personal</p>
+                </div>
+                <NavItem view={ViewState.PROFILE} icon={UserCircle} label="My Profile" />
+                <NavItem view={ViewState.MEMBERSHIP} icon={CreditCard} label="Membership" />
+              </>
+            )}
           </nav>
         </div>
         <div className="p-4 border-t border-gray-100 bg-gray-50">
           <button
             onClick={onLogout}
-            className="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 rounded-xl transition-colors"
+            className="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-xl transition-colors"
           >
             <LogOut className="w-5 h-5" /> Sign Out
           </button>
