@@ -61,7 +61,7 @@ export const Stories: React.FC = () => {
     }));
   };
 
-  const handleComment = (id: string, title: string) => {
+  const handleComment = (_id: string, title: string) => {
     const comment = prompt(`Write a comment for "${title}":`);
     if (comment) {
       alert('Thanks! Your comment has been posted (Simulated).');
@@ -147,7 +147,7 @@ const StoryForm: React.FC<StoryFormProps> = ({
   onCancel,
 }) => (
   <div className="bg-white p-6 rounded-2xl border border-brand-200 shadow-lg animate-fade-in relative z-10">
-    <button onClick={onCancel} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+    <button type="button" onClick={onCancel} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600" aria-label="Close story form">
       <X className="w-5 h-5" />
     </button>
     <h3 className="text-lg font-bold text-gray-900 mb-4">Write a Story</h3>

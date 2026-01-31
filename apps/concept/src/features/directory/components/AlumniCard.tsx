@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { GraduationCap, MapPin, UserPlus, MessageSquare } from 'lucide-react';
 import { AlumniProfile } from '../../../shared/types';
 
@@ -6,7 +6,7 @@ interface AlumniCardProps {
   alum: AlumniProfile;
 }
 
-export const AlumniCard: React.FC<AlumniCardProps> = ({ alum }) => {
+export const AlumniCard: React.FC<AlumniCardProps> = memo(({ alum }) => {
   const handleConnect = () => {
     alert('Connect Request Sent (Simulated)');
   };
@@ -23,6 +23,8 @@ export const AlumniCard: React.FC<AlumniCardProps> = ({ alum }) => {
             src={alum.avatar}
             alt={alum.name}
             className="w-12 h-12 rounded-xl object-cover border border-border shadow-sm"
+            loading="lazy"
+            decoding="async"
           />
           <div
             className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-card rounded-full"
@@ -39,10 +41,10 @@ export const AlumniCard: React.FC<AlumniCardProps> = ({ alum }) => {
               <GraduationCap className="w-3 h-3" /> {alum.batch}
             </span>
             <span
-              className="inline-flex items-center gap-1 text-[10px] text-muted-foreground truncate max-w-[100px]"
+              className="inline-flex items-center gap-1 text-[10px] text-muted-foreground truncate max-w-25"
               title={alum.location}
             >
-              <MapPin className="w-3 h-3 flex-shrink-0" /> {alum.location.split(',')[0]}
+              <MapPin className="w-3 h-3 shrink-0" /> {alum.location.split(',')[0]}
             </span>
           </div>
         </div>
@@ -50,18 +52,24 @@ export const AlumniCard: React.FC<AlumniCardProps> = ({ alum }) => {
 
       <div className="flex gap-2 pt-3 border-t border-border mt-auto">
         <button
+          type="button"
           onClick={handleConnect}
           className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 active:scale-95 transition-all shadow-sm"
         >
           <UserPlus className="w-3 h-3" /> Connect
         </button>
         <button
+          type="button"
           onClick={handleMessage}
           className="flex items-center justify-center px-3 py-2 rounded-lg bg-card border border-input text-card-foreground text-xs font-medium hover:bg-muted hover:border-border active:scale-95 transition-all"
+          title="Send Message"
+          aria-label="Send Message"
         >
           <MessageSquare className="w-3 h-3" />
         </button>
       </div>
     </div>
   );
-};
+});
+
+AlumniCard.displayName = 'AlumniCard';

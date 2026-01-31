@@ -163,6 +163,8 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => (
       src={photo.url}
       alt={photo.caption}
       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      loading="lazy"
+      decoding="async"
     />
     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
       <p className="text-white font-medium truncate">{photo.caption}</p>
@@ -197,6 +199,8 @@ const ArchiveCard: React.FC<ArchiveCardProps> = ({ doc }) => (
         src={doc.coverImage}
         alt={doc.title}
         className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+        loading="lazy"
+        decoding="async"
       />
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
         <div className="bg-white/90 backdrop-blur px-4 py-2 rounded-full text-xs font-bold shadow-sm">View</div>
@@ -242,6 +246,8 @@ const Lightbox: React.FC<LightboxProps> = ({ photo, onClose }) => (
           src={photo.url}
           alt={photo.caption}
           className="max-w-full max-h-[80vh] rounded-lg shadow-2xl object-contain"
+          loading="lazy"
+          decoding="async"
         />
       </div>
       <div className="mt-6 text-center">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'white';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -8,7 +8,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: ButtonSize;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = memo(({
   children,
   variant = 'primary',
   size = 'md',
@@ -39,4 +39,6 @@ export const Button: React.FC<ButtonProps> = ({
       {children}
     </button>
   );
-};
+});
+
+Button.displayName = 'Button';

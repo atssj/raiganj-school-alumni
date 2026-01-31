@@ -60,6 +60,8 @@ const GalleryPhotoCard: React.FC<GalleryPhotoCardProps> = ({ photo, index }) => 
           src={photo.url}
           className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
           alt={photo.caption}
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
           <span className="text-white font-serif italic text-sm px-4 text-center">{photo.caption}</span>

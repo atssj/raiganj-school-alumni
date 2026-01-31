@@ -25,6 +25,8 @@ export const HeroStats: React.FC<HeroStatsProps> = ({
                   className="w-6 h-6 md:w-8 md:h-8 rounded-full border border-white/20 object-cover"
                   src={`https://picsum.photos/100/100?random=${i + 20}`}
                   alt="Alumni"
+                  loading="lazy"
+                  decoding="async"
                 />
               ))}
             </div>

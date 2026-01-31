@@ -66,6 +66,8 @@ export const AlumniSuccess: React.FC = () => {
                     src={alumni.image} 
                     alt={alumni.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute top-4 right-4 bg-white/10 backdrop-blur px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-brand-200 border border-white/10">
                     {alumni.highlight}

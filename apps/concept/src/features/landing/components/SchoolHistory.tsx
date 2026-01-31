@@ -32,6 +32,8 @@ export const SchoolHistory: React.FC = () => {
                     src="https://images.unsplash.com/photo-1599930113854-d6d7fd521f10?q=80&w=1600&auto=format&fit=crop" 
                     alt="Raiganj Vidya Chakra Old Building" 
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
                   />
                   {/* Vintage Overlay */}
                   <div className="absolute inset-0 bg-sepia-[0.3] opacity-50 mix-blend-overlay pointer-events-none" />

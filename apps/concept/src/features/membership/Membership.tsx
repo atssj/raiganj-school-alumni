@@ -182,8 +182,8 @@ const LifeMemberPlan: React.FC<PlanProps> = ({ onJoin, isLoading }) => (
     </ul>
 
     <Button
-      variant="white"
-      className="w-full justify-center border-none relative z-10"
+      variant="secondary"
+      className="w-full justify-center border-none relative z-10 bg-white text-brand-900 hover:bg-brand-50"
       onClick={onJoin}
       disabled={isLoading}
     >

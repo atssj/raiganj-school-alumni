@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 
 interface LogoProps {
   className?: string;
@@ -14,7 +14,7 @@ const sizes: Record<NonNullable<LogoProps['size']>, string> = {
   '3xl': 'w-24 h-24 text-3xl'
 };
 
-export const Logo: React.FC<LogoProps> = ({ 
+export const Logo: React.FC<LogoProps> = memo(({ 
   className = '', 
   size = 'md' 
 }) => {
@@ -35,4 +35,6 @@ export const Logo: React.FC<LogoProps> = ({
       onError={() => setHasError(true)}
     />
   );
-};
+});
+
+Logo.displayName = 'Logo';

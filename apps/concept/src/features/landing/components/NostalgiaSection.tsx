@@ -34,7 +34,7 @@ export const NostalgiaSection: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 h-auto overflow-visible p-4">
           {/* Column 1 - Moves Up */}
-          <motion.div style={{ y: y1 }} className="flex flex-col gap-12">
+          <motion.div style={{ y: y1, willChange: 'transform' }} className="flex flex-col gap-12 transform-gpu">
             <MemoryCard 
               icon={Bike}
               title="Cycle Rides"
@@ -43,6 +43,7 @@ export const NostalgiaSection: React.FC = () => {
               color="bg-orange-50 text-orange-600"
               image="https://images.unsplash.com/photo-1541625602330-2277a4c46182?q=80&w=800&auto=format&fit=crop"
               rotate={-2}
+              loading="lazy"
             />
             <MemoryCard 
               icon={Book}
@@ -55,7 +56,7 @@ export const NostalgiaSection: React.FC = () => {
           </motion.div>
 
           {/* Column 2 - Moves Down (Slower) */}
-          <motion.div style={{ y: y3 }} className="flex flex-col gap-12 pt-12 md:pt-0">
+          <motion.div style={{ y: y3, willChange: 'transform' }} className="flex flex-col gap-12 pt-12 md:pt-0 transform-gpu">
             <MemoryCard 
               icon={Coffee}
               title="Tiffin Breaks"
@@ -64,6 +65,7 @@ export const NostalgiaSection: React.FC = () => {
               color="bg-amber-50 text-amber-600"
               image="https://images.unsplash.com/photo-1594488517527-b50a0b80981f?q=80&w=800&auto=format&fit=crop"
               rotate={2}
+              loading="lazy"
             />
              <div className="p-8 bg-brand-900 text-center flex flex-col items-center justify-center text-white h-64 shadow-xl transform -rotate-1 hover:rotate-0 transition-transform duration-300 relative group overflow-hidden">
                 {/* Vintage Texture Overlay */}
@@ -77,7 +79,7 @@ export const NostalgiaSection: React.FC = () => {
           </motion.div>
 
           {/* Column 3 - Moves Up */}
-          <motion.div style={{ y: y2 }} className="flex flex-col gap-12 hidden lg:flex">
+          <motion.div style={{ y: y2, willChange: 'transform' }} className="flex flex-col gap-12 hidden lg:flex transform-gpu">
              <MemoryCard 
               icon={Music}
               title="Saraswati Puja"
@@ -86,6 +88,7 @@ export const NostalgiaSection: React.FC = () => {
               color="bg-yellow-50 text-yellow-600"
               image="https://images.unsplash.com/photo-1614958564117-649da4320921?q=80&w=800&auto=format&fit=crop"
               rotate={-1}
+              loading="lazy"
             />
             <MemoryCard 
               icon={Book}
@@ -102,7 +105,7 @@ export const NostalgiaSection: React.FC = () => {
   );
 };
 
-const MemoryCard = ({ icon: Icon, title, subtitle, desc, color, image, rotate = 0 }: any) => (
+const MemoryCard = ({ icon: Icon, title, subtitle, desc, color, image, rotate = 0, loading }: any) => (
   <div 
     className="group relative bg-white p-3 shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:z-10 hover:-translate-y-2 hover:rotate-0"
     style={{ transform: `rotate(${rotate}deg)` }}
@@ -114,7 +117,13 @@ const MemoryCard = ({ icon: Icon, title, subtitle, desc, color, image, rotate = 
         {image && (
         <div className="h-48 w-full overflow-hidden mb-4 relative grayscale group-hover:grayscale-0 transition-all duration-700">
             <div className="absolute inset-0 bg-brand-900/10 group-hover:bg-transparent transition-colors z-10" />
-            <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+            <img 
+              src={image} 
+              alt={title} 
+              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+              loading={loading || "lazy"}
+              decoding="async"
+            />
         </div>
         )}
         <div className="mt-2">

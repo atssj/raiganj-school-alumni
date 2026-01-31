@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar as CalendarIcon, Sparkles, Plus, X, CheckCircle, Loader } from 'lucide-react';
+import { Calendar as CalendarIcon, Sparkles, Plus, X, CheckCircle } from 'lucide-react';
 import { Button } from '../../shared/components';
 import { suggestEventIdeas } from '../../shared/services/geminiService';
 import { EventItem } from '../../shared/types';
@@ -154,7 +154,13 @@ interface CreateEventFormProps {
 
 const CreateEventForm: React.FC<CreateEventFormProps> = ({ event, onChange, onSubmit, onCancel }) => (
   <div className="bg-white p-6 rounded-2xl border border-brand-200 shadow-lg animate-fade-in relative z-10">
-    <button onClick={onCancel} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+    <button
+      type="button"
+      onClick={onCancel}
+      className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+      aria-label="Close form"
+      title="Close"
+    >
       <X className="w-5 h-5" />
     </button>
     <h3 className="text-lg font-bold text-gray-900 mb-4">Host a New Event</h3>

@@ -63,7 +63,8 @@ export const AlumniTestimonials: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl mx-4 md:mx-20 relative"
+              className="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl mx-4 md:mx-20 relative transform-gpu"
+              style={{ willChange: 'transform, opacity' }}
             >
               <Quote className="absolute top-8 left-8 md:top-12 md:left-12 w-12 h-12 md:w-20 md:h-20 text-brand-100/50 rotate-180" />
               
@@ -74,6 +75,8 @@ export const AlumniTestimonials: React.FC = () => {
                       src={TESTIMONIALS[currentIndex].image} 
                       alt={TESTIMONIALS[currentIndex].author}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                   <div className="absolute -bottom-2 right-0 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
@@ -95,16 +98,22 @@ export const AlumniTestimonials: React.FC = () => {
           </AnimatePresence>
 
           {/* Controls */}
-          <button 
+          <button
+            type="button"
             onClick={prev}
             className="absolute top-1/2 left-0 md:-left-4 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-brand-600 hover:scale-110 transition-all z-20"
+            aria-label="Previous testimonial"
+            title="Previous testimonial"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           
-          <button 
+          <button
+            type="button"
             onClick={next}
             className="absolute top-1/2 right-0 md:-right-4 -translate-y-1/2 p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-brand-600 hover:scale-110 transition-all z-20"
+            aria-label="Next testimonial"
+            title="Next testimonial"
           >
             <ChevronRight className="w-6 h-6" />
           </button>

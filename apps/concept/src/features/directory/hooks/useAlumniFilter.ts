@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useDeferredValue, useCallback, TransitionStartFunction } from 'react';
 import { AlumniProfile } from '../../../shared/types';
 
 export interface FilterState {
@@ -14,14 +14,51 @@ export interface FilterActions {
   resetFilters: () => void;
 }
 
-export const useAlumniFilter = (alumni: AlumniProfile[]): FilterState & FilterActions & {
+export const useAlumniFilter = (
+  alumni: AlumniProfile[],
+  startTransition?: TransitionStartFunction
+): FilterState & FilterActions & {
   filteredAlumni: AlumniProfile[];
   batches: number[];
   professions: string[];
 } => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedBatch, setSelectedBatch] = useState('');
-  const [selectedProfession, setSelectedProfession] = useState('');
+  const [searchTerm, setSearchTermState] = useState('');
+  const [selectedBatch, setSelectedBatchState] = useState('');
+  const [selectedProfession, setSelectedProfessionState] = useState('');
+  
+  // Use deferred value for smoother typing experience
+  const deferredSearchTerm = useDeferredValue(searchTerm);
+
+  // Wrap state updates in transitions for non-urgent updates
+  const setSearchTerm = useCallback((term: string) => {
+    if (startTransition) {
+      startTransition(() => {
+        setSearchTermState(term);
+      });
+    } else {
+      setSearchTermState(term);
+    }
+  }, [startTransition]);
+
+  const setSelectedBatch = useCallback((batch: string) => {
+    if (startTransition) {
+      startTransition(() => {
+        setSelectedBatchState(batch);
+      });
+    } else {
+      setSelectedBatchState(batch);
+    }
+  }, [startTransition]);
+
+  const setSelectedProfession = useCallback((profession: string) => {
+    if (startTransition) {
+      startTransition(() => {
+        setSelectedProfessionState(profession);
+      });
+    } else {
+      setSelectedProfessionState(profession);
+    }
+  }, [startTransition]);
 
   const batches = useMemo(
     () => [...new Set(alumni.map(a => a.batch))].sort((a, b) => b - a),
@@ -36,22 +73,30 @@ export const useAlumniFilter = (alumni: AlumniProfile[]): FilterState & FilterAc
   const filteredAlumni = useMemo(() => {
     return alumni.filter(a => {
       const matchesSearch =
-        a.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        a.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        a.profession.toLowerCase().includes(searchTerm.toLowerCase());
+        a.name.toLowerCase().includes(deferredSearchTerm.toLowerCase()) ||
+        a.location.toLowerCase().includes(deferredSearchTerm.toLowerCase()) ||
+        a.profession.toLowerCase().includes(deferredSearchTerm.toLowerCase());
 
       const matchesBatch = selectedBatch ? a.batch.toString() === selectedBatch : true;
       const matchesProfession = selectedProfession ? a.profession === selectedProfession : true;
 
       return matchesSearch && matchesBatch && matchesProfession;
     });
-  }, [alumni, searchTerm, selectedBatch, selectedProfession]);
+  }, [alumni, deferredSearchTerm, selectedBatch, selectedProfession]);
 
-  const resetFilters = () => {
-    setSearchTerm('');
-    setSelectedBatch('');
-    setSelectedProfession('');
-  };
+  const resetFilters = useCallback(() => {
+    if (startTransition) {
+      startTransition(() => {
+        setSearchTermState('');
+        setSelectedBatchState('');
+        setSelectedProfessionState('');
+      });
+    } else {
+      setSearchTermState('');
+      setSelectedBatchState('');
+      setSelectedProfessionState('');
+    }
+  }, [startTransition]);
 
   return {
     searchTerm,

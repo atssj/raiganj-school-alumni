@@ -1,9 +1,10 @@
 {
-  "name": "raiganj-heritage-alumni",
+  "name": "@raiganj-school-alumni/concept",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "type-check": "tsc --noEmit",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -12,17 +13,22 @@
     "@google/genai": "^1.38.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/vite": "^4.1.18",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.29.2",
     "lucide-react": "^0.563.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tailwindcss": "^4.1.18"
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.18",
+    "web-vitals": "^3.5.0"
   },
   "devDependencies": {
     "@types/node": "^25.1.0",
     "@types/react": "19",
     "@types/react-dom": "19",
     "@vitejs/plugin-react": "^5.0.0",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "terser": "^5.31.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }

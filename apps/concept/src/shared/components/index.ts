@@ -38,3 +38,24 @@ export type { RevealProps } from './Reveal';
 
 export { Logo } from './Logo';
 export { Copyright } from './Copyright';
+
+// Performance optimized components
+export { LazyImage } from './LazyImage';
+export type { LazyImageProps } from './LazyImage';
+
+// Skeleton loading components
+export {
+  SectionSkeleton,
+  CardSkeleton,
+  GallerySkeleton,
+  DirectorySkeleton,
+  DashboardSkeleton,
+} from './skeletons';
+
+export type {
+  SectionSkeletonProps,
+  CardSkeletonProps,
+  GallerySkeletonProps,
+  DirectorySkeletonProps,
+  DashboardSkeletonProps,
+} from './skeletons';

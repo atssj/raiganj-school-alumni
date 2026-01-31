@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useTransition } from 'react';
 import { Search, Briefcase, X, GraduationCap, ChevronDown } from 'lucide-react';
 import { AlumniCard } from './components/AlumniCard';
 import { useAlumniFilter } from './hooks/useAlumniFilter';
+import { DirectorySkeleton } from '../../shared/components/skeletons/DirectorySkeleton';
 import { MOCK_ALUMNI } from '../../data/mocks';
 
 export const Directory: React.FC = () => {
+  const [isPending, startTransition] = useTransition();
   const {
     searchTerm,
     selectedBatch,
@@ -16,7 +18,7 @@ export const Directory: React.FC = () => {
     filteredAlumni,
     batches,
     professions,
-  } = useAlumniFilter(MOCK_ALUMNI);
+  } = useAlumniFilter(MOCK_ALUMNI, startTransition);
 
   const hasActiveFilters = searchTerm || selectedBatch || selectedProfession;
 
@@ -44,6 +46,7 @@ export const Directory: React.FC = () => {
             onChange={setSelectedBatch}
             options={batches.map(b => ({ value: b.toString(), label: b.toString() }))}
             placeholder="Batch: All"
+            ariaLabel="Filter by graduation batch year"
           />
 
           <FilterSelect
@@ -52,6 +55,7 @@ export const Directory: React.FC = () => {
             onChange={setSelectedProfession}
             options={professions.map(p => ({ value: p, label: p }))}
             placeholder="Role: All"
+            ariaLabel="Filter by profession or role"
           />
 
           {hasActiveFilters && <ResetButton onClick={resetFilters} />}
@@ -59,13 +63,17 @@ export const Directory: React.FC = () => {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {filteredAlumni.map(alum => (
-          <AlumniCard key={alum.id} alum={alum} />
-        ))}
+      {isPending ? (
+        <DirectorySkeleton itemCount={8} />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {filteredAlumni.map(alum => (
+            <AlumniCard key={alum.id} alum={alum} />
+          ))}
 
-        {filteredAlumni.length === 0 && <EmptyState onReset={resetFilters} />}
-      </div>
+          {filteredAlumni.length === 0 && <EmptyState onReset={resetFilters} />}
+        </div>
+      )}
     </div>
   );
 };
@@ -95,10 +103,11 @@ interface FilterSelectProps {
   onChange: (value: string) => void;
   options: { value: string; label: string }[];
   placeholder: string;
+  ariaLabel: string;
 }
 
-const FilterSelect: React.FC<FilterSelectProps> = ({ icon: Icon, value, onChange, options, placeholder }) => (
-  <div className="relative group min-w-[140px] flex-shrink-0">
+const FilterSelect: React.FC<FilterSelectProps> = ({ icon: Icon, value, onChange, options, placeholder, ariaLabel }) => (
+  <div className="relative group min-w-35 shrink-0">
     <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
       <Icon className="h-4 w-4 text-gray-500 group-hover:text-brand-600 transition-colors" />
     </div>
@@ -106,6 +115,7 @@ const FilterSelect: React.FC<FilterSelectProps> = ({ icon: Icon, value, onChange
       className="w-full appearance-none pl-10 pr-8 py-3 rounded-xl bg-gray-50 hover:bg-gray-100 text-sm font-medium text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all border-none"
       value={value}
       onChange={e => onChange(e.target.value)}
+      aria-label={ariaLabel}
     >
       <option value="">{placeholder}</option>
       {options.map(opt => (

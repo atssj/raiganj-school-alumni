@@ -28,10 +28,13 @@ export const Reveal: React.FC<RevealProps> = ({ children, className = '', delay 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform ${
+      className={`transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform-gpu ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ 
+        transitionDelay: `${delay}ms`,
+        willChange: 'transform, opacity'
+      }}
     >
       {children}
     </div>

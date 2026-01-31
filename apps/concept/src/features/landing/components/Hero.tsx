@@ -46,13 +46,16 @@ export const Hero: React.FC = () => {
     >
       {/* Background w/ Parallax - Now Offset to Right */}
       <motion.div 
-        style={{ y: yBg, rotateX: springRotateX, rotateY: springRotateY, scale: 1.05 }}
-        className="absolute right-0 top-0 bottom-0 w-full md:w-[60%] z-0 origin-center opacity-40 md:opacity-100"
+        style={{ y: yBg, rotateX: springRotateX, rotateY: springRotateY, scale: 1.05, willChange: 'transform' }}
+        className="absolute right-0 top-0 bottom-0 w-full md:w-[60%] z-0 origin-center opacity-40 md:opacity-100 transform-gpu"
       >
         <img
           src="/images/hero/sketch-2.jpg"
           className="w-full h-full object-cover object-center"
           alt="Raiganj School Sketch"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
         {/* Gradient Overlay for blending into solid color */}
         <div className="absolute inset-0 bg-gradient-to-r from-brand-950 via-transparent to-transparent" />
