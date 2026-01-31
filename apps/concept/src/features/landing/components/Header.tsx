@@ -151,7 +151,7 @@ export const Header: React.FC<HeaderProps> = ({ variant = 'transparent' }) => {
 
       {/* Mobile Menu Backdrop & Drawer */}
       <div
-        className={`md:hidden fixed inset-0 z-40 transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 z-[60] transition-all duration-300 ${
           isMobileMenuOpen ? 'visible' : 'invisible delay-300'
         }`}
       >
@@ -172,16 +172,25 @@ export const Header: React.FC<HeaderProps> = ({ variant = 'transparent' }) => {
           <div className="flex flex-col h-full overflow-y-auto">
             {/* Mobile Header in Drawer */}
             <div className="px-6 py-6 border-b border-gray-100 bg-gray-50/50">
-              <div className="flex items-center gap-3">
-                <Logo size="md" />
-                <div className="flex flex-col">
-                  <span className="font-bengali text-lg font-bold text-gray-900 leading-none">
-                    রায়গঞ্জ বিদ্যাচক্র
-                  </span>
-                  <span className="text-[10px] uppercase tracking-widest text-brand-600 font-bold mt-1">
-                    Alumni Network
-                  </span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Logo size="md" />
+                  <div className="flex flex-col">
+                    <span className="font-bengali text-lg font-bold text-gray-900 leading-none">
+                      রায়গঞ্জ বিদ্যাচক্র
+                    </span>
+                    <span className="text-[10px] uppercase tracking-widest text-brand-600 font-bold mt-1">
+                      Alumni Network
+                    </span>
+                  </div>
                 </div>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-gray-500 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="w-6 h-6" />
+                </button>
               </div>
             </div>
 

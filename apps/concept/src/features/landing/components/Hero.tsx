@@ -1,54 +1,17 @@
 import React from 'react';
 import { ArrowRight, Play, MapPin } from 'lucide-react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { HeroStats } from './HeroStats';
 import { HeroVideo } from './HeroVideo';
 
 export const Hero: React.FC = () => {
-  const containerRef = React.useRef<HTMLElement>(null);
-  const { scrollY } = useScroll();
-  
-  // Scroll Parallax: Background moves slower than foreground
-  const yBg = useTransform(scrollY, [0, 500], [0, 100]); 
-  
-  // Mouse Parallax
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [3, -3]);
-  const rotateY = useTransform(x, [-100, 100], [-3, 3]);
-
-  // Smooth mouse movement
-  const springConfig = { damping: 25, stiffness: 100 };
-  const springRotateX = useSpring(rotateX, springConfig);
-  const springRotateY = useSpring(rotateY, springConfig);
-
-  function handleMouseMove(event: React.MouseEvent<HTMLElement>) {
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (rect) {
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      x.set((event.clientX - centerX) / 10); // Divisor controls sensitivity
-      y.set((event.clientY - centerY) / 10);
-    }
-  }
-
-  function handleMouseLeave() {
-    x.set(0);
-    y.set(0);
-  }
-
   return (
-    <section 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative min-h-dvh w-full flex items-center overflow-hidden pt-20 pb-28 md:pb-32 perspective-1000 bg-brand-950"
+    <section
+      className="relative min-h-dvh w-full flex items-center overflow-hidden pt-20 pb-28 md:pb-32 bg-brand-950"
     >
-      {/* Background w/ Parallax - HeroVideo with Cloudinary */}
-      <motion.div
-        style={{ y: yBg, rotateX: springRotateX, rotateY: springRotateY, scale: 1.05, willChange: 'transform' }}
-        className="absolute right-0 top-0 bottom-0 w-full md:w-[60%] z-0 origin-center opacity-40 md:opacity-100 transform-gpu"
+      {/* Background - HeroVideo with Cloudinary (no parallax) */}
+      <div
+        className="absolute right-0 top-0 bottom-0 w-full md:w-[60%] z-0 origin-center opacity-40 md:opacity-100"
       >
         <HeroVideo
           cloudName="donrm4btg"
@@ -59,7 +22,7 @@ export const Hero: React.FC = () => {
         {/* Gradient Overlay for blending into solid color */}
         <div className="absolute inset-0 bg-linear-to-r from-brand-950 via-transparent to-transparent" />
         <div className="absolute inset-0 bg-linear-to-t from-brand-950/80 via-transparent to-transparent" />
-      </motion.div>
+      </div>
 
       {/* Content - Left Aligned */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-10 md:pt-0 h-full flex flex-col justify-center pointer-events-none">
