@@ -1,28 +1,28 @@
-import { createHashRouter, Navigate, Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { LandingPage } from '../features/landing';
-import { PublicLayout } from '../features/landing/PublicLayout';
-import { About } from '../features/about';
-import { Gallery } from '../features/gallery';
-import { Stories } from '../features/stories';
-import { Events } from '../features/events';
-import { Donate } from '../features/donation';
-import { Volunteer } from '../features/volunteer';
-import { LoginPage } from '../features/auth/LoginPage';
-import { DashboardLayout } from '../features/dashboard/DashboardLayout';
-import { Overview } from '../features/dashboard/components';
-import { Directory } from '../features/directory';
-import { ReconnectionAssistant } from '../features/ai-assistant';
-import { Membership } from '../features/membership';
-import { Profile } from '../features/profile';
-import { Admin } from '../features/admin';
-import { AdminMembers } from '../features/admin/AdminMembers';
-import { DonationWorkReports } from '../features/admin/DonationWorkReports';
-import { AdminEvents } from '../features/admin/AdminEvents';
-import { AdminVolunteers } from '../features/admin/AdminVolunteers';
-import { ProtectedRoute } from '../features/auth/components/ProtectedRoute';
-import { AdminRoute } from '../features/auth/components/AdminRoute';
+import { createHashRouter, Navigate, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { LandingPage } from "../features/landing";
+import { PublicLayout } from "../features/landing/PublicLayout";
+import { About } from "../features/about";
+import { Gallery } from "../features/gallery";
+import { Stories } from "../features/stories";
+import { Events } from "../features/events";
+import { Donate } from "../features/donation";
+import { Volunteer } from "../features/volunteer";
+import { LoginPage } from "../features/auth/LoginPage";
+import { DashboardLayout } from "../features/dashboard/DashboardLayout";
+import { Overview } from "../features/dashboard/components";
+import { Directory } from "../features/directory";
+import { ReconnectionAssistant } from "../features/ai-assistant";
+import { Membership } from "../features/membership";
+import { Profile } from "../features/profile";
+import { Admin } from "../features/admin";
+import { AdminMembers } from "../features/admin/AdminMembers";
+import { DonationWorkReports } from "../features/admin/DonationWorkReports";
+import { AdminEvents } from "../features/admin/AdminEvents";
+import { AdminVolunteers } from "../features/admin/AdminVolunteers";
+import { ProtectedRoute } from "../features/auth/components/ProtectedRoute";
+import { AdminRoute } from "../features/auth/components/AdminRoute";
 
 // Scroll to top wrapper component
 const ScrollToTop: React.FC = () => {
@@ -50,49 +50,49 @@ export const router = createHashRouter([
     children: [
       // Landing Page (separate layout)
       {
-        path: '/',
+        path: "/",
         element: <LandingPage />,
       },
-      
+
       // Public pages with standard layout
       {
         element: <PublicLayout />,
         children: [
           {
-            path: '/about',
+            path: "/about",
             element: <About />,
           },
           {
-            path: '/gallery',
+            path: "/gallery",
             element: <GalleryLazy />,
           },
           {
-            path: '/stories',
+            path: "/stories",
             element: <StoriesLazy />,
           },
           {
-            path: '/events',
+            path: "/events",
             element: <EventsLazy />,
           },
           {
-            path: '/donate',
+            path: "/donate",
             element: <DonateLazy />,
           },
           {
-            path: '/volunteer',
+            path: "/volunteer",
             element: <VolunteerLazy />,
           },
         ],
       },
 
       {
-        path: '/login',
+        path: "/login",
         element: <LoginPage />,
       },
 
       // Protected member routes
       {
-        path: '/dashboard',
+        path: "/dashboard",
         element: (
           <ProtectedRoute>
             <DashboardLayout />
@@ -104,39 +104,39 @@ export const router = createHashRouter([
             element: <Overview />,
           },
           {
-            path: 'directory',
+            path: "directory",
             element: <DirectoryLazy />,
           },
           {
-            path: 'events',
+            path: "events",
             element: <EventsLazy />,
           },
           {
-            path: 'gallery',
+            path: "gallery",
             element: <GalleryLazy />,
           },
           {
-            path: 'stories',
+            path: "stories",
             element: <StoriesLazy />,
           },
           {
-            path: 'ai-assistant',
+            path: "ai-assistant",
             element: <ReconnectionAssistantLazy />,
           },
           {
-            path: 'membership',
+            path: "membership",
             element: <MembershipLazy />,
           },
           {
-            path: 'donate',
+            path: "donate",
             element: <DonateLazy />,
           },
           {
-            path: 'volunteer',
+            path: "volunteer",
             element: <VolunteerLazy />,
           },
           {
-            path: 'profile',
+            path: "profile",
             element: <ProfileLazy />,
           },
         ],
@@ -144,7 +144,7 @@ export const router = createHashRouter([
 
       // Admin routes
       {
-        path: '/admin',
+        path: "/admin",
         element: (
           <AdminRoute>
             <DashboardLayout isAdmin />
@@ -156,27 +156,43 @@ export const router = createHashRouter([
             element: <Admin />,
           },
           {
-            path: 'members',
+            path: "members",
             element: <AdminMembers />,
           },
           {
-            path: 'donations',
+            path: "donations",
             element: <DonationWorkReports />,
           },
           {
-            path: 'events',
+            path: "events",
             element: <AdminEvents />,
           },
           {
-            path: 'volunteers',
+            path: "volunteers",
             element: <AdminVolunteers />,
+          },
+          {
+            path: "directory",
+            element: <DirectoryLazy />,
+          },
+          {
+            path: "gallery",
+            element: <GalleryLazy />,
+          },
+          {
+            path: "donate",
+            element: <DonateLazy />,
+          },
+          {
+            path: "community-events",
+            element: <EventsLazy />,
           },
         ],
       },
 
       // Catch-all redirect to home
       {
-        path: '*',
+        path: "*",
         element: <Navigate to="/" replace />,
       },
     ],

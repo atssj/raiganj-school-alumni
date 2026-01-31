@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Coffee, Music, Bike, Book, Heart } from 'lucide-react';
+import { Coffee, Music, Bike, Book, Heart, GraduationCap } from 'lucide-react';
 import { Reveal } from '../../../shared/components';
 
 export const NostalgiaSection: React.FC = () => {
@@ -33,54 +33,9 @@ export const NostalgiaSection: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 h-auto overflow-visible p-4">
-          {/* Column 1 - Moves Up */}
+          {/* Column 1 - Moves Up - Saraswati Puja & Teachers' Day */}
           <motion.div style={{ y: y1, willChange: 'transform' }} className="flex flex-col gap-12 transform-gpu">
             <MemoryCard 
-              icon={Bike}
-              title="Cycle Rides"
-              subtitle="The Morning Rush"
-              desc="Racing through the misty streets of Raiganj to reach before the prayer bell."
-              color="bg-orange-50 text-orange-600"
-              image="https://images.unsplash.com/photo-1541625602330-2277a4c46182?q=80&w=800&auto=format&fit=crop"
-              rotate={-2}
-              loading="lazy"
-            />
-            <MemoryCard 
-              icon={Book}
-              title="Library Hours"
-              subtitle="Hidden Comics"
-              desc="Pretending to study while secretly reading Tintin and Feluda inside textbooks."
-              color="bg-blue-50 text-blue-600"
-              rotate={1}
-            />
-          </motion.div>
-
-          {/* Column 2 - Moves Down (Slower) */}
-          <motion.div style={{ y: y3, willChange: 'transform' }} className="flex flex-col gap-12 pt-12 md:pt-0 transform-gpu">
-            <MemoryCard 
-              icon={Coffee}
-              title="Tiffin Breaks"
-              subtitle="Sharing is Caring"
-              desc="Changes of Singara and Ghugni. The best conversations happened with food in mouth."
-              color="bg-amber-50 text-amber-600"
-              image="https://images.unsplash.com/photo-1594488517527-b50a0b80981f?q=80&w=800&auto=format&fit=crop"
-              rotate={2}
-              loading="lazy"
-            />
-             <div className="p-8 bg-brand-900 text-center flex flex-col items-center justify-center text-white h-64 shadow-xl transform -rotate-1 hover:rotate-0 transition-transform duration-300 relative group overflow-hidden">
-                {/* Vintage Texture Overlay */}
-                <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/aged-paper.png')] pointer-events-none" />
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-8 bg-white/20 rotate-1 shadow-sm backdrop-blur-sm" />
-
-                <Heart className="w-12 h-12 mb-4 text-brand-300 animate-pulse" />
-                <h3 className="text-2xl font-serif font-bold mb-2 relative z-10">First Crush</h3>
-                <p className="text-brand-200 text-sm relative z-10">Notes passed silently.</p>
-             </div>
-          </motion.div>
-
-          {/* Column 3 - Moves Up */}
-          <motion.div style={{ y: y2, willChange: 'transform' }} className="flex flex-col gap-12 hidden lg:flex transform-gpu">
-             <MemoryCard 
               icon={Music}
               title="Saraswati Puja"
               subtitle="The Annual Festival"
@@ -90,7 +45,65 @@ export const NostalgiaSection: React.FC = () => {
               rotate={-1}
               loading="lazy"
             />
+             <MemoryCard 
+              icon={GraduationCap}
+              title="Teachers' Day"
+              subtitle="Role Reversal"
+              desc="Mimicking our favorite teachers, organizing the function, and seeking their blessings."
+              color="bg-purple-50 text-purple-600"
+              rotate={1}
+            />
+          </motion.div>
+
+          {/* Column 2 - Moves Down (Slower) - Cycle Rides & Tiffin */}
+          <motion.div style={{ y: y3, willChange: 'transform' }} className="flex flex-col gap-12 pt-12 md:pt-0 transform-gpu">
+             <MemoryCard 
+              icon={Bike}
+              title="Cycle Rides"
+              subtitle="The Morning Rush"
+              desc="Racing through the misty streets of Raiganj to reach before the prayer bell."
+              color="bg-orange-50 text-orange-600"
+              image="https://images.unsplash.com/photo-1541625602330-2277a4c46182?q=80&w=800&auto=format&fit=crop"
+              rotate={-2}
+              loading="lazy"
+            />
+             <MemoryCard 
+              icon={Coffee}
+              title="Tiffin Breaks"
+              subtitle="Sharing is Caring"
+              desc="Changes of Singara and Ghugni. The best conversations happened with food in mouth."
+              color="bg-amber-50 text-amber-600"
+              image="https://images.unsplash.com/photo-1594488517527-b50a0b80981f?q=80&w=800&auto=format&fit=crop"
+              rotate={2}
+              loading="lazy"
+            />
+          </motion.div>
+
+          {/* Column 3 - Moves Up - Library, First Crush, Last Benchers */}
+          <motion.div style={{ y: y2, willChange: 'transform' }} className="flex flex-col gap-12 hidden lg:flex transform-gpu">
             <MemoryCard 
+              icon={Book}
+              title="Library Hours"
+              subtitle="Hidden Comics"
+              desc="Pretending to study while secretly reading Tintin and Feluda inside textbooks."
+              color="bg-blue-50 text-blue-600"
+              rotate={1}
+            />
+             <div className="group relative h-64 rounded-3xl border border-rose-200/70 bg-rose-50/60 p-6 text-center shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-rose-300 hover:shadow-lg">
+                {/* Tape Effect */}
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-amber-300/50 opacity-80 rotate-2 shadow-sm z-20 backdrop-blur-sm transform skew-x-12" />
+                <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-rose-50 via-white to-rose-100/70 opacity-80" />
+                <div className="absolute right-5 top-5 h-10 w-10 rounded-full border border-rose-200/70 bg-white/70" />
+
+                <div className="relative z-10 flex h-full flex-col items-center justify-center gap-2">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-rose-200 bg-white/90 shadow-xs">
+                    <Heart className="h-5 w-5 text-rose-500" />
+                  </div>
+                  <h3 className="text-xl font-serif font-semibold text-rose-950">First Crush</h3>
+                  <p className="text-xs uppercase tracking-[0.25em] text-rose-400">Notes passed silently.</p>
+                </div>
+             </div>
+             <MemoryCard 
               icon={Book}
               title="Last Benchers"
               subtitle="Backbench Legends"
@@ -111,7 +124,7 @@ const MemoryCard = ({ icon: Icon, title, subtitle, desc, color, image, rotate = 
     style={{ transform: `rotate(${rotate}deg)` }}
   >
     {/* Tape Effect */}
-    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/80 opacity-60 rotate-2 shadow-sm z-20 backdrop-blur-sm transform skew-x-12" />
+    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-amber-300/50 opacity-80 rotate-2 shadow-sm z-20 backdrop-blur-sm transform skew-x-12" />
 
     <div className="relative bg-white border border-gray-100 p-4 h-full">
         {image && (

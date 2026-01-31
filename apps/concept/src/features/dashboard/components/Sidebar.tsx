@@ -140,10 +140,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <NavItem to="/admin/volunteers" icon={HandHeart} label="Volunteer Requests" />
               
               <SectionHeader label="Community" />
-              <NavItem to="/dashboard/directory" icon={Users} label="Directory" />
-              <NavItem to="/dashboard/events" icon={Calendar} label="Events & Reunions" />
-              <NavItem to="/dashboard/gallery" icon={Image} label="Gallery & Archive" />
-              <NavItem to="/dashboard/donate" icon={HandHeart} label="Donations" />
+              <NavItem to="/admin/directory" icon={Users} label="Directory" />
+              <NavItem to="/admin/community-events" icon={Calendar} label="Events & Reunions" />
+              <NavItem to="/admin/gallery" icon={Image} label="Gallery & Archive" />
+              <NavItem to="/admin/donate" icon={HandHeart} label="Donations" />
             </>
           ) : (
             <>
