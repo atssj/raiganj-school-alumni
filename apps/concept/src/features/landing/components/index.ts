@@ -14,3 +14,5 @@ export * from './AlumniTestimonials';
 export * from './UpcomingEvents';
 export * from './JoinCTA';
 export { Credits } from './Credits';
+export * from './GalleryPreview';
+export * from './FundUtilizationPreview';

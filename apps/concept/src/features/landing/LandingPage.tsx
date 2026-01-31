@@ -3,7 +3,7 @@ import { ViewState } from '../../shared/types';
 import { LoginModal } from '../auth/components/LoginModal';
 import { 
   Header, Hero, Footer,
-  SchoolHistory, NostalgiaSection, AlumniSuccess, AlumniTestimonials, UpcomingEvents, JoinCTA
+  SchoolHistory, NostalgiaSection, AlumniSuccess, AlumniTestimonials, UpcomingEvents, JoinCTA, GalleryPreview, FundUtilizationPreview
 } from './components';
 import { useMobileMenu, useLoginModal } from './hooks';
 
@@ -35,6 +35,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin, o
         <Hero onNavigate={onNavigate} />
         <SchoolHistory onNavigate={onNavigate} />
         <NostalgiaSection />
+        <GalleryPreview onNavigate={onNavigate} />
+        <FundUtilizationPreview onNavigate={onNavigate} />
         <AlumniSuccess onNavigate={onNavigate} />
         <AlumniTestimonials />
         <UpcomingEvents onNavigate={onNavigate} />

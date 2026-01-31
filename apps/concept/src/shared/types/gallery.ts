@@ -2,7 +2,7 @@ export interface GalleryPhoto {
   id: string;
   url: string;
   caption: string;
-  category: 'Campus' | 'Reunion' | 'Sports' | 'Old Days';
+  category: 'Campus' | 'Reunion' | 'Sports' | 'Old Days' | 'Saraswati Puja' | 'Exhibitions' | 'Career Guidance';
   year: number;
 }
 

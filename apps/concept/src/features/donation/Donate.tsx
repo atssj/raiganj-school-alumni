@@ -120,7 +120,7 @@ const CampaignSelector: React.FC<CampaignSelectorProps> = ({
   selectedCampaign,
   onSelect,
 }) => (
-  <div className="flex overflow-x-auto gap-4 pb-4 snap-x">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4">
     {campaigns.map(campaign => (
       <CampaignCard
         key={campaign.id}
@@ -144,7 +144,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({ campaign, isSelected, onCli
   return (
     <button
       onClick={onClick}
-      className={`min-w-[280px] md:min-w-[320px] text-left p-4 rounded-2xl border transition-all snap-center ${
+      className={`w-full h-full text-left p-4 rounded-2xl border transition-all hover:shadow-md ${
         isSelected
           ? 'border-brand-500 ring-1 ring-brand-500 bg-brand-50'
           : 'border-gray-200 bg-white hover:border-brand-200'

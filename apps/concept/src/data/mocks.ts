@@ -1,4 +1,4 @@
-import { AlumniProfile, EventItem, StoryItem, GalleryPhoto, ArchiveDocument } from '../shared/types';
+import { AlumniProfile, EventItem, StoryItem, GalleryPhoto, ArchiveDocument, DonationStats, DonationWorkReport } from '../shared/types';
 
 export const MOCK_ALUMNI: AlumniProfile[] = [
   { id: '1', name: 'Dr. Arindam Bose', batch: 1998, location: 'Kolkata, WB', profession: 'Cardiologist', avatar: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop' },
@@ -47,12 +47,12 @@ export const MOCK_STORIES: StoryItem[] = [
 ];
 
 export const MOCK_GALLERY: GalleryPhoto[] = [
-  { id: '1', url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&fit=crop', caption: 'Morning Assembly, Main Ground', category: 'Campus', year: 1998 },
-  { id: '2', url: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&fit=crop', caption: 'Batch of 2010 Farewell', category: 'Reunion', year: 2010 },
-  { id: '3', url: 'https://images.unsplash.com/photo-1526725702345-bdda2b97ef73?w=800&fit=crop', caption: 'Inter-School Football Final', category: 'Sports', year: 2005 },
-  { id: '4', url: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=800&fit=crop', caption: 'Old Chemistry Lab', category: 'Old Days', year: 1992 },
-  { id: '5', url: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&fit=crop', caption: 'Saraswati Puja Celebration', category: 'Campus', year: 2015 },
-  { id: '6', url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&fit=crop', caption: 'Winter Reunion Dinner', category: 'Reunion', year: 2022 },
+  { id: '1', url: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&fit=crop', caption: 'Saraswati Puja Celebration', category: 'Saraswati Puja', year: 2015 },
+  { id: '2', url: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?w=800&fit=crop', caption: 'Evening Science Exhibition', category: 'Exhibitions', year: 2018 },
+  { id: '3', url: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&fit=crop', caption: 'Career Guidance Seminar', category: 'Career Guidance', year: 2023 },
+  { id: '4', url: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&fit=crop', caption: 'Saraswati Puja Anjali', category: 'Saraswati Puja', year: 2019 },
+  { id: '5', url: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&fit=crop', caption: 'Art & Craft Exhibition', category: 'Exhibitions', year: 2012 },
+  { id: '6', url: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&fit=crop', caption: 'Alumni Career Mentorship', category: 'Career Guidance', year: 2024 },
 ];
 
 export const MOCK_ARCHIVE: ArchiveDocument[] = [
@@ -60,4 +60,58 @@ export const MOCK_ARCHIVE: ArchiveDocument[] = [
   { id: '2', title: 'Annual Sports Report', type: 'Document', year: 2002, coverImage: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&fit=crop', size: '2.5 MB' },
   { id: '3', title: 'Golden Jubilee Magazine', type: 'Magazine', year: 2002, coverImage: 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&fit=crop', size: '45 MB' },
   { id: '4', title: 'Class X Batch List', type: 'Document', year: 1988, coverImage: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&fit=crop', size: '1 MB' },
+];
+
+export const MOCK_FUND_STATS: DonationStats = {
+  totalDonations: 1250000,
+  totalSpent: 875000,
+  totalProjects: 12,
+  beneficiariesHelped: 450,
+  pendingProjects: 3,
+  completedProjects: 9,
+};
+
+export const MOCK_FUND_PROJECTS: DonationWorkReport[] = [
+  {
+    id: '1',
+    title: 'School Library Renovation',
+    description: 'Complete renovation of the school library including new furniture, books, and computer systems.',
+    date: '2025-12-15',
+    amountSpent: 250000,
+    category: 'Education',
+    images: ['https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=800&fit=crop'],
+    beneficiaries: 200,
+    location: 'Raiganj High School',
+    status: 'Completed',
+    createdAt: '2025-11-01',
+    updatedAt: '2025-12-20',
+  },
+  {
+    id: '2',
+    title: 'Scholarship Program',
+    description: 'Annual scholarship program providing financial assistance to 50 deserving students.',
+    date: '2025-11-30',
+    amountSpent: 150000,
+    category: 'Education',
+    images: ['https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&fit=crop'],
+    beneficiaries: 50,
+    location: 'Raiganj',
+    status: 'Completed',
+    createdAt: '2025-10-15',
+    updatedAt: '2025-11-30',
+  },
+  {
+    id: '3',
+    title: 'Clean Drinking Water',
+    description: 'Installation of RO water purifiers at multiple locations in the school campus.',
+    date: '2026-03-15',
+    amountSpent: 50000,
+    category: 'Infrastructure',
+    images: ['https://images.unsplash.com/photo-1538300642153-7c5ef8e9c5c2?w=800&fit=crop'],
+    beneficiaries: 500,
+    location: 'Raiganj High School',
+    status: 'Planned',
+    createdAt: '2026-01-20',
+    updatedAt: '2026-01-20',
+  },
 ];
