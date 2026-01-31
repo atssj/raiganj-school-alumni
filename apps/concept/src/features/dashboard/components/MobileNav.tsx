@@ -11,6 +11,7 @@ import {
   UserCircle,
 } from 'lucide-react';
 import { ViewState } from '../../../shared/types';
+import { Button } from '../../../shared/components';
 
 interface MobileNavProps {
   currentView: ViewState;
@@ -38,22 +39,21 @@ export const MobileNav: React.FC<MobileNavProps> = ({
     icon: React.ElementType;
     label: string;
   }) => (
-    <button
+    <Button
+      variant={currentView === view ? 'default' : 'ghost'}
       onClick={() => {
         onChangeView(view);
         onClose();
       }}
-      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-        currentView === view
-          ? 'bg-brand-50 text-brand-700 font-semibold'
-          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+      className={`w-full justify-start gap-3 px-4 py-3 h-auto text-base font-medium ${
+        currentView === view ? 'shadow-sm' : 'text-gray-600 hover:text-gray-900'
       }`}
     >
       <Icon
-        className={`w-5 h-5 ${currentView === view ? 'text-brand-600 stroke-[2.5px]' : 'text-gray-400'}`}
+        className={`w-5 h-5 mr-2 ${currentView === view ? 'text-current' : 'text-gray-400'}`}
       />
       {label}
-    </button>
+    </Button>
   );
 
   if (!isOpen) return null;
@@ -105,12 +105,13 @@ export const MobileNav: React.FC<MobileNavProps> = ({
           </nav>
         </div>
         <div className="p-4 border-t border-gray-100 bg-gray-50">
-          <button
+          <Button
+            variant="ghost"
             onClick={onLogout}
-            className="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-xl transition-colors"
+            className="w-full justify-start gap-3 px-4 py-3 h-auto text-base font-medium text-gray-600 hover:text-gray-900"
           >
-            <LogOut className="w-5 h-5" /> Sign Out
-          </button>
+            <LogOut className="w-5 h-5 mr-2" /> Sign Out
+          </Button>
         </div>
       </div>
     </div>

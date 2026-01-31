@@ -1,8 +1,8 @@
-import React, { memo, useMemo, useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import { MapPin, Facebook, Linkedin, Youtube } from "lucide-react";
 import { ViewState } from "../../../shared/types";
 import { Credits } from "./Credits";
-import { Logo } from "../../../shared/components";
+import { Logo, Copyright } from "../../../shared/components";
 import { cn } from "../../../shared/lib/utils";
 
 interface FooterProps {
@@ -131,8 +131,7 @@ export const Footer: React.FC<FooterProps> = memo(({
   onLoginClick,
   onAdminLogin,
 }) => {
-  // Memoize current year to prevent recalculation on every render
-  const currentYear = useMemo(() => new Date().getFullYear(), []);
+
 
   /**
    * Type-safe handler for quick link clicks.
@@ -236,9 +235,7 @@ export const Footer: React.FC<FooterProps> = memo(({
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-primary-foreground/60 text-sm text-center md:text-left">
-          <p className="font-bengali">
-            &copy; {currentYear} রায়গঞ্জ বিদ্যাচক্র প্রাক্তনী সমিতি
-          </p>
+          <Copyright className="text-primary-foreground/60 text-sm" />
           <nav aria-label="Legal links" className="flex gap-8">
             <a
               href="#"

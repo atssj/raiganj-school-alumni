@@ -37,3 +37,4 @@ export { Reveal } from './Reveal';
 export type { RevealProps } from './Reveal';
 
 export { Logo } from './Logo';
+export { Copyright } from './Copyright';
