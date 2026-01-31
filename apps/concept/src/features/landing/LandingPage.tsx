@@ -1,7 +1,10 @@
 import React from 'react';
 import { ViewState } from '../../shared/types';
 import { LoginModal } from '../auth/components/LoginModal';
-import { Header, Hero, About, Gallery, Features, Footer } from './components';
+import { 
+  Header, Hero, Footer,
+  SchoolHistory, NostalgiaSection, AlumniSuccess, AlumniTestimonials, UpcomingEvents, JoinCTA
+} from './components';
 import { useMobileMenu, useLoginModal } from './hooks';
 
 interface LandingPageProps {
@@ -30,9 +33,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, onLogin, o
 
       <main className="flex-1">
         <Hero onNavigate={onNavigate} />
-        <About onNavigate={onNavigate} />
-        <Gallery onNavigate={onNavigate} />
-        <Features onNavigate={onNavigate} />
+        <SchoolHistory onNavigate={onNavigate} />
+        <NostalgiaSection />
+        <AlumniSuccess onNavigate={onNavigate} />
+        <AlumniTestimonials />
+        <UpcomingEvents onNavigate={onNavigate} />
+        <JoinCTA onNavigate={onNavigate} />
       </main>
 
       <Footer onNavigate={onNavigate} onLoginClick={openLoginModal} onAdminLogin={onAdminLogin} />

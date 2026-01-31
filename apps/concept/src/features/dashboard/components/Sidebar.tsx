@@ -51,7 +51,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           variant={isActive ? 'default' : isDanger ? 'destructive' : 'ghost'}
           className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 justify-start ${
             isActive
-              ? 'bg-gray-100 text-gray-900 font-semibold shadow-sm'
+              ? 'font-semibold shadow-sm'
               : isDanger 
                 ? 'text-rose-600 hover:bg-rose-50 hover:text-rose-700'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-medium'
@@ -59,7 +59,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         >
           <Icon
             className={`transition-all duration-200 ${
-              isActive ? 'text-gray-900' : isDanger ? 'text-rose-500 group-hover:text-rose-600' : 'text-gray-400 group-hover:text-gray-600'
+              isActive ? 'text-current' : isDanger ? 'text-rose-500 group-hover:text-rose-600' : 'text-gray-400 group-hover:text-gray-600'
             } ${isCollapsed ? 'w-5 h-5' : 'w-4.5 h-4.5'}`}
           />
           {!isCollapsed && <span className="truncate tracking-tight">{label}</span>}
