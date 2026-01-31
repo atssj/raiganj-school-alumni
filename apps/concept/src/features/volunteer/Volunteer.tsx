@@ -176,14 +176,27 @@ const ApplicationForm: React.FC<ApplicationFormProps> = ({ selectedRole, isSubmi
         </div>
 
         <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
-            <input
-              required
-              type="text"
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 outline-none transition-all"
-              placeholder="Your Name"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name</label>
+              <input
+                required
+                type="text"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 outline-none transition-all"
+                placeholder="Your Name"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Batch Year</label>
+              <input
+                required
+                type="number"
+                min="1950"
+                max="2030"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-brand-500 outline-none transition-all"
+                placeholder="2001"
+              />
+            </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>

@@ -1,7 +1,8 @@
-import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
+import { createHashRouter, Navigate, Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { LandingPage } from '../features/landing';
+import { PublicLayout } from '../features/landing/PublicLayout';
 import { About } from '../features/about';
 import { Gallery } from '../features/gallery';
 import { Stories } from '../features/stories';
@@ -43,39 +44,47 @@ const ReconnectionAssistantLazy = ReconnectionAssistant;
 const MembershipLazy = Membership;
 const ProfileLazy = Profile;
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     element: <ScrollToTop />,
     children: [
-      // Public routes
+      // Landing Page (separate layout)
       {
         path: '/',
         element: <LandingPage />,
       },
+      
+      // Public pages with standard layout
       {
-        path: '/about',
-        element: <About />,
+        element: <PublicLayout />,
+        children: [
+          {
+            path: '/about',
+            element: <About />,
+          },
+          {
+            path: '/gallery',
+            element: <GalleryLazy />,
+          },
+          {
+            path: '/stories',
+            element: <StoriesLazy />,
+          },
+          {
+            path: '/events',
+            element: <EventsLazy />,
+          },
+          {
+            path: '/donate',
+            element: <DonateLazy />,
+          },
+          {
+            path: '/volunteer',
+            element: <VolunteerLazy />,
+          },
+        ],
       },
-      {
-        path: '/gallery',
-        element: <GalleryLazy />,
-      },
-      {
-        path: '/stories',
-        element: <StoriesLazy />,
-      },
-      {
-        path: '/events',
-        element: <EventsLazy />,
-      },
-      {
-        path: '/donate',
-        element: <DonateLazy />,
-      },
-      {
-        path: '/volunteer',
-        element: <VolunteerLazy />,
-      },
+
       {
         path: '/login',
         element: <LoginPage />,

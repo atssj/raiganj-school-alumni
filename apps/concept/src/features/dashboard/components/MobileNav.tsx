@@ -61,7 +61,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="md:hidden fixed inset-0 z-20">
+    <div className="md:hidden fixed inset-0 z-40">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
       <div className="absolute top-0 right-0 w-[80%] max-w-sm h-full bg-white shadow-2xl flex flex-col pt-16 animate-fade-in">
         <div className="flex-1 overflow-y-auto p-4">

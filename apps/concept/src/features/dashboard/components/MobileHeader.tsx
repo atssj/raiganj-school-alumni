@@ -8,7 +8,7 @@ interface MobileHeaderProps {
 }
 
 export const MobileHeader: React.FC<MobileHeaderProps> = ({ isMenuOpen, onMenuToggle }) => (
-  <div className="md:hidden fixed top-0 left-0 w-full bg-white z-30 border-b border-gray-200 px-4 py-3 flex justify-between items-center shadow-sm">
+  <div className="md:hidden fixed top-0 left-0 w-full bg-white z-50 border-b border-gray-200 px-4 py-3 flex justify-between items-center shadow-sm">
     <div className="flex items-center gap-2">
       <Logo size="sm" />
       <span className="font-bengali text-lg font-bold text-gray-900">

@@ -15,18 +15,26 @@ import {
 import { Button, Logo } from '../../../shared/components';
 import { useScrollHeader } from '../../../shared/hooks';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  variant?: 'transparent' | 'solid';
+}
+
+export const Header: React.FC<HeaderProps> = ({ variant = 'transparent' }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isScrolled } = useScrollHeader(20);
 
-  const navTextColor = isScrolled ? 'text-gray-900' : 'text-white';
-  const logoSubtext = isScrolled ? 'text-gray-500' : 'text-gray-300';
-  const menuIconColor = isScrolled ? 'text-gray-900' : 'text-white';
+  // If variant is solid, always show solid background and dark text
+  const isSolid = variant === 'solid' || isScrolled;
+
+  const navTextColor = isSolid ? 'text-gray-900' : 'text-white';
+  const logoSubtext = isSolid ? 'text-gray-500' : 'text-gray-300';
+  const menuIconColor = isSolid ? 'text-gray-900' : 'text-white';
 
   return (
+    <>
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
+        isSolid
           ? 'bg-white/90 backdrop-blur-xl border-b border-gray-100/50 py-2 shadow-sm'
           : 'bg-transparent py-4 md:py-6'
       }`}
@@ -40,9 +48,9 @@ export const Header: React.FC = () => {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <Logo
-              size={isScrolled ? 'lg' : 'xl'}
+              size={isSolid ? 'lg' : 'xl'}
               className={
-                !isScrolled ? 'md:!w-24 md:!h-24 transition-all duration-300' : 'transition-all duration-300'
+                !isSolid ? 'md:!w-24 md:!h-24 transition-all duration-300' : 'transition-all duration-300'
               }
             />
             <div className="flex flex-col">
@@ -63,7 +71,7 @@ export const Header: React.FC = () => {
           <div className="hidden md:flex items-center">
             <div
               className={`flex items-center gap-1 pl-6 pr-1.5 py-1.5 rounded-full backdrop-blur-xl border shadow-lg shadow-black/5 transition-all duration-300 ${
-                isScrolled
+                isSolid
                   ? 'bg-white/80 border-gray-200/60 ring-1 ring-gray-900/5'
                   : 'bg-brand-950/20 border-white/10 ring-1 ring-white/5'
               }`}
@@ -73,37 +81,37 @@ export const Header: React.FC = () => {
                 <NavDropdown
                   label="About"
                   navTextColor={navTextColor}
-                  navHoverColor={isScrolled ? 'hover:text-brand-600' : 'hover:text-amber-200'}
+                  navHoverColor={isSolid ? 'hover:text-brand-600' : 'hover:text-amber-200'}
                   isActive={true}
-                  isScrolled={isScrolled}
+                  isScrolled={isSolid}
                 />
                 <NavDropdown
                   label="Gallery"
                   navTextColor={navTextColor}
-                  navHoverColor={isScrolled ? 'hover:text-brand-600' : 'hover:text-amber-200'}
+                  navHoverColor={isSolid ? 'hover:text-brand-600' : 'hover:text-amber-200'}
                   to="/gallery"
-                  isScrolled={isScrolled}
+                  isScrolled={isSolid}
                 />
                 <NavDropdown
                   label="Stories"
                   navTextColor={navTextColor}
-                  navHoverColor={isScrolled ? 'hover:text-brand-600' : 'hover:text-amber-200'}
+                  navHoverColor={isSolid ? 'hover:text-brand-600' : 'hover:text-amber-200'}
                   to="/stories"
-                  isScrolled={isScrolled}
+                  isScrolled={isSolid}
                 />
                 <NavDropdown
                   label="Events"
                   navTextColor={navTextColor}
-                  navHoverColor={isScrolled ? 'hover:text-brand-600' : 'hover:text-amber-200'}
+                  navHoverColor={isSolid ? 'hover:text-brand-600' : 'hover:text-amber-200'}
                   to="/events"
-                  isScrolled={isScrolled}
+                  isScrolled={isSolid}
                 />
 
                 {/* Engage Dropdown */}
                 <div className="relative group">
                   <button
                     className={`flex items-center gap-1 text-sm font-medium transition-colors py-2 cursor-pointer ${navTextColor} ${
-                      isScrolled ? 'hover:text-brand-600' : 'hover:text-amber-200'
+                      isSolid ? 'hover:text-brand-600' : 'hover:text-amber-200'
                     }`}
                   >
                     Engage
@@ -139,6 +147,7 @@ export const Header: React.FC = () => {
           </button>
         </div>
       </div>
+    </nav>
 
       {/* Mobile Menu Backdrop & Drawer */}
       <div
@@ -226,7 +235,7 @@ export const Header: React.FC = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
