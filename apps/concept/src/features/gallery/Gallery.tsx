@@ -84,6 +84,7 @@ interface TabButtonProps {
 
 const TabButton: React.FC<TabButtonProps> = ({ active, onClick, icon: Icon, children }) => (
   <button
+    type="button"
     onClick={onClick}
     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
       active ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
@@ -138,6 +139,7 @@ const CategoryFilterButton: React.FC<CategoryFilterButtonProps> = ({
   onClick,
 }) => (
   <button
+    type="button"
     onClick={onClick}
     className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
       isActive
@@ -156,7 +158,7 @@ interface PhotoCardProps {
 
 const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => (
   <div
-    className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer bg-gray-100"
+    className="group relative aspect-4/3 rounded-2xl overflow-hidden cursor-pointer bg-gray-100"
     onClick={onClick}
   >
     <img
@@ -166,7 +168,7 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onClick }) => (
       loading="lazy"
       decoding="async"
     />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
       <p className="text-white font-medium truncate">{photo.caption}</p>
       <p className="text-brand-200 text-xs">
         {photo.year} • {photo.category}
@@ -194,7 +196,7 @@ interface ArchiveCardProps {
 
 const ArchiveCard: React.FC<ArchiveCardProps> = ({ doc }) => (
   <div className="group bg-white rounded-2xl border border-gray-100 p-4 hover:shadow-lg hover:border-brand-100 transition-all duration-300">
-    <div className="aspect-[3/4] bg-gray-50 rounded-xl overflow-hidden mb-4 relative shadow-inner border border-gray-100">
+    <div className="aspect-3/4 bg-gray-50 rounded-xl overflow-hidden mb-4 relative shadow-inner border border-gray-100">
       <img
         src={doc.coverImage}
         alt={doc.title}
@@ -213,7 +215,12 @@ const ArchiveCard: React.FC<ArchiveCardProps> = ({ doc }) => (
           {doc.type} • {doc.year}
         </p>
       </div>
-      <button className="text-gray-400 hover:text-brand-600 transition-colors" title="Download">
+      <button
+        type="button"
+        className="text-gray-400 hover:text-brand-600 transition-colors"
+        title="Download"
+        aria-label="Download document"
+      >
         <Download className="w-5 h-5" />
       </button>
     </div>
@@ -236,7 +243,12 @@ const Lightbox: React.FC<LightboxProps> = ({ photo, onClose }) => (
     className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-fade-in"
     onClick={onClose}
   >
-    <button className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors">
+    <button
+      type="button"
+      className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+      title="Close lightbox"
+      aria-label="Close lightbox"
+    >
       <X className="w-8 h-8" />
     </button>
 

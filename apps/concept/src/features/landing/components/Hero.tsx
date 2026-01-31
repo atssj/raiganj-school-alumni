@@ -42,7 +42,7 @@ export const Hero: React.FC = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-[100dvh] w-full flex items-center overflow-hidden pt-20 pb-28 md:pb-32 perspective-1000 bg-brand-950"
+      className="relative min-h-dvh w-full flex items-center overflow-hidden pt-20 pb-28 md:pb-32 perspective-1000 bg-brand-950"
     >
       {/* Background w/ Parallax - Now Offset to Right */}
       <motion.div 
@@ -50,16 +50,16 @@ export const Hero: React.FC = () => {
         className="absolute right-0 top-0 bottom-0 w-full md:w-[60%] z-0 origin-center opacity-40 md:opacity-100 transform-gpu"
       >
         <img
-          src="/images/hero/sketch-2.jpg"
+          src="/hero-image.jpg"
           className="w-full h-full object-cover object-center"
-          alt="Raiganj School Sketch"
+          alt="Raiganj Vidya Chakra School Sketch"
           fetchPriority="high"
           loading="eager"
           decoding="async"
         />
         {/* Gradient Overlay for blending into solid color */}
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-950 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-brand-950 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-brand-950/80 via-transparent to-transparent" />
       </motion.div>
 
       {/* Content - Left Aligned */}
@@ -72,10 +72,10 @@ export const Hero: React.FC = () => {
                 </span>
                 
                 <span className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold tracking-tight leading-[1.1]">
-                  Rooted in <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 animate-gradient-xy italic font-light decoration-brand-400/30 underline-offset-8 decoration-2">History</span>.
+                  Rooted in <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-200 animate-gradient-xy italic font-light decoration-brand-400/30 underline-offset-8 decoration-2">History</span>.
                 </span>
                 <span className="text-4xl sm:text-6xl md:text-7xl font-serif font-bold tracking-tight leading-[1.1]">
-                  Connected by <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 animate-gradient-xy italic font-light pb-2">Heart</span>.
+                  Connected by <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-200 via-yellow-100 to-amber-200 animate-gradient-xy italic font-light pb-2">Heart</span>.
                 </span>
               </h1>
             </div>
