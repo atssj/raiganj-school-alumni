@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { Camera, Save, MapPin, Briefcase, GraduationCap, User } from 'lucide-react';
 import { Button } from '../../shared/components';
-import { AlumniProfile } from '../../shared/types';
+import { useAuth } from '../auth/components/ProtectedRoute';
 
-interface ProfileProps {
-  user: AlumniProfile;
-  onUpdate: (updatedUser: AlumniProfile) => void;
-}
-
-export const Profile: React.FC<ProfileProps> = ({ user, onUpdate }) => {
-  const [formData, setFormData] = useState<AlumniProfile>(user);
+export const Profile: React.FC = () => {
+  const { user } = useAuth();
+  const [formData, setFormData] = useState({
+    name: user?.name || 'Rahul C.',
+    batch: user?.batch || 2010,
+    profession: user?.profession || 'Software Engineer',
+    location: user?.location || 'Raiganj, WB',
+    avatar: user?.avatar || 'https://picsum.photos/id/1012/200/200',
+  });
   const [successMsg, setSuccessMsg] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onUpdate(formData);
     setSuccessMsg('Profile updated successfully!');
     setTimeout(() => setSuccessMsg(''), 3000);
   };
 
-  const updateField = <K extends keyof AlumniProfile>(field: K, value: AlumniProfile[K]) => {
+  const updateField = (field: string, value: string | number) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 

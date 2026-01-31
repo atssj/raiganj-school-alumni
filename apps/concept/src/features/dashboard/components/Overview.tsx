@@ -1,49 +1,46 @@
 import React from 'react';
-import { ViewState, AlumniProfile } from '../../../shared/types';
+import { Link } from 'react-router-dom';
 import { Button } from '../../../shared/components';
+import { useAuth } from '../../auth/components/ProtectedRoute';
 
-interface OverviewProps {
-  currentUser: AlumniProfile;
-  onChangeView: (view: ViewState) => void;
-}
+export const Overview: React.FC = () => {
+  const { user } = useAuth();
+  const userName = user?.name?.split(' ')[0] || 'Alumni';
 
-export const Overview: React.FC<OverviewProps> = ({ currentUser, onChangeView }) => {
   return (
     <div className="space-y-6 md:space-y-8 animate-fade-in">
       <div className="bg-gradient-to-r from-brand-600 to-brand-800 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden shadow-lg">
         <div className="relative z-10">
           <h1 className="text-2xl md:text-3xl font-serif font-bold mb-2">
-            Welcome back, {currentUser.name.split(' ')[0]}!
+            Welcome back, {userName}!
           </h1>
           <p className="text-brand-100 text-sm md:text-base max-w-lg">
             There are 3 upcoming reunions this winter in Raiganj. Connect with your batchmates now.
           </p>
-          <Button
-            variant="white"
-            className="mt-6 w-full md:w-auto"
-            onClick={() => onChangeView(ViewState.DIRECTORY)}
-          >
-            Find Batchmates
-          </Button>
+          <Link to="/dashboard/directory">
+            <Button className="mt-6 w-full md:w-auto bg-white text-brand-700 hover:bg-gray-100">
+              Find Batchmates
+            </Button>
+          </Link>
         </div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-16 -mt-16 pointer-events-none" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <RecentJoinees onViewAll={() => onChangeView(ViewState.DIRECTORY)} />
+        <RecentJoinees />
         <SchoolNews />
       </div>
     </div>
   );
 };
 
-const RecentJoinees: React.FC<{ onViewAll: () => void }> = ({ onViewAll }) => (
+const RecentJoinees: React.FC = () => (
   <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
     <div className="flex justify-between items-center mb-4">
       <h3 className="font-bold text-gray-900">Recent Joinees</h3>
-      <button className="text-xs text-brand-600 font-medium" onClick={onViewAll}>
+      <Link to="/dashboard/directory" className="text-xs text-brand-600 font-medium hover:underline">
         View All
-      </button>
+      </Link>
     </div>
     <div className="space-y-4">
       {[1, 2, 3].map(i => (

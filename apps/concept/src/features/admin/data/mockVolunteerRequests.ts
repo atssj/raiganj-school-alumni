@@ -1,0 +1,85 @@
+import { VolunteerRequest } from '../types';
+
+export const mockVolunteerRequests: VolunteerRequest[] = [
+  {
+    id: '1',
+    applicantName: 'Rajesh Kumar',
+    email: 'rajesh.k@example.com',
+    phone: '+91 98765 43210',
+    batch: 2010,
+    roleId: 'mentor',
+    roleTitle: 'Student Mentor',
+    message:
+      'I have been working in the IT industry for over 10 years and would love to guide students interested in technology careers. I can help with resume reviews, interview preparation, and career counseling.',
+    status: 'pending',
+    submittedAt: '2026-01-25T10:30:00Z',
+  },
+  {
+    id: '2',
+    applicantName: 'Priya Sharma',
+    email: 'priya.s@example.com',
+    phone: '+91 98765 43211',
+    batch: 2012,
+    roleId: 'speaker',
+    roleTitle: 'Guest Speaker',
+    message:
+      'As a healthcare professional, I would like to conduct seminars on medical career paths for students. I can also organize health awareness workshops for the school community.',
+    status: 'pending',
+    submittedAt: '2026-01-26T14:15:00Z',
+  },
+  {
+    id: '3',
+    applicantName: 'Amit Banerjee',
+    email: 'amit.b@example.com',
+    phone: '+91 98765 43212',
+    batch: 2008,
+    roleId: 'organizer',
+    roleTitle: 'Event Organizer',
+    message:
+      'I have experience organizing corporate events and would love to help coordinate the upcoming Winter Reunion. I can assist with venue coordination, guest management, and logistics.',
+    status: 'pending',
+    submittedAt: '2026-01-27T09:00:00Z',
+  },
+  {
+    id: '4',
+    applicantName: 'Sneha Patel',
+    email: 'sneha.p@example.com',
+    phone: '+91 98765 43213',
+    batch: 2015,
+    roleId: 'content',
+    roleTitle: 'Content Contributor',
+    message:
+      'I am a freelance writer and would like to contribute articles about alumni success stories, interview notable alumni, and help manage the social media presence of the association.',
+    status: 'approved',
+    submittedAt: '2026-01-20T16:45:00Z',
+    reviewedAt: '2026-01-22T11:30:00Z',
+  },
+  {
+    id: '5',
+    applicantName: 'Vikram Singh',
+    email: 'vikram.s@example.com',
+    phone: '+91 98765 43214',
+    batch: 2011,
+    roleId: 'mentor',
+    roleTitle: 'Student Mentor',
+    message:
+      'Currently working as a Chartered Accountant, I would like to mentor students interested in finance and accounting careers. I can provide guidance on CA/CS courses and exam preparation.',
+    status: 'approved',
+    submittedAt: '2026-01-18T13:20:00Z',
+    reviewedAt: '2026-01-19T10:00:00Z',
+  },
+  {
+    id: '6',
+    applicantName: 'Ananya Das',
+    email: 'ananya.d@example.com',
+    phone: '+91 98765 43215',
+    batch: 2013,
+    roleId: 'speaker',
+    roleTitle: 'Guest Speaker',
+    message:
+      'As an entrepreneur who has built a successful startup, I would like to share my journey with students. I can speak about entrepreneurship, innovation, and overcoming challenges.',
+    status: 'rejected',
+    submittedAt: '2026-01-15T11:00:00Z',
+    reviewedAt: '2026-01-16T15:30:00Z',
+  },
+];

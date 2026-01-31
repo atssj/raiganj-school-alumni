@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Home,
   Users,
@@ -9,61 +10,79 @@ import {
   Heart,
   HandHeart,
   Image,
+  Sparkles,
+  BookOpen,
 } from 'lucide-react';
-import { ViewState, AlumniProfile } from '../../../shared/types';
 import { Logo, Button } from '../../../shared/components';
 
 interface SidebarProps {
-  currentView: ViewState;
-  onChangeView: (view: ViewState) => void;
-  currentUser: AlumniProfile;
   onLogout: () => void;
   isCollapsed: boolean;
   isAdmin: boolean;
+  user: {
+    id: string;
+    name: string;
+    batch: number;
+    location: string;
+    profession: string;
+    avatar: string;
+  } | null;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
-  currentView,
-  onChangeView,
-  currentUser,
   onLogout,
   isCollapsed,
   isAdmin,
+  user,
 }) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const NavItem = ({
-    view,
+    to,
     icon: Icon,
     label,
     isDanger = false,
-    onClick,
   }: {
-    view?: ViewState;
+    to?: string;
     icon: React.ElementType;
     label: string;
     isDanger?: boolean;
-    onClick?: () => void;
   }) => {
-    const isActive = view === currentView;
+    const isActive = to ? currentPath === to || currentPath.startsWith(to + '/') : false;
+    
+    if (isDanger) {
+      return (
+        <div className="relative group">
+          <Button
+            onClick={onLogout}
+            variant="ghost"
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 justify-start text-rose-600 hover:bg-rose-50 hover:text-rose-700"
+          >
+            <Icon className="w-4.5 h-4.5 text-rose-500 group-hover:text-rose-600 transition-all duration-200" />
+            {!isCollapsed && <span className="truncate tracking-tight">{label}</span>}
+          </Button>
+        </div>
+      );
+    }
+
     return (
       <div className="relative group">
-        <Button
-          onClick={onClick ? onClick : () => view && onChangeView(view)}
-          variant={isActive ? 'default' : isDanger ? 'destructive' : 'ghost'}
-          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 justify-start ${
+        <Link
+          to={to || '#'}
+          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-200 ${
             isActive
-              ? 'font-semibold shadow-sm'
-              : isDanger 
-                ? 'text-rose-600 hover:bg-rose-50 hover:text-rose-700'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-medium'
+              ? 'font-semibold shadow-sm bg-brand-600 text-white'
+              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-medium'
           } ${isCollapsed ? 'justify-center' : ''}`}
         >
           <Icon
             className={`transition-all duration-200 ${
-              isActive ? 'text-current' : isDanger ? 'text-rose-500 group-hover:text-rose-600' : 'text-gray-400 group-hover:text-gray-600'
+              isActive ? 'text-current' : 'text-gray-400 group-hover:text-gray-600'
             } ${isCollapsed ? 'w-5 h-5' : 'w-4.5 h-4.5'}`}
           />
           {!isCollapsed && <span className="truncate tracking-tight">{label}</span>}
-        </Button>
+        </Link>
         
         {/* Tooltip for collapsed mode */}
         {isCollapsed && (
@@ -96,18 +115,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="flex flex-col h-full">
         {/* Header / Logo Area */}
         <div className={`flex items-center justify-center h-16 border-b border-gray-50 mb-2`}>
-          <div
+          <Link
+            to={isAdmin ? '/admin' : '/dashboard'}
             className={`flex items-center justify-center cursor-pointer transition-all duration-300 ${isCollapsed ? 'scale-90' : 'scale-100'}`}
-            onClick={() => onChangeView(ViewState.DASHBOARD_HOME)}
           >
              <Logo size="md" />
-          </div>
+          </Link>
         </div>
 
         {/* Scrollable Nav Area */}
         <div className="flex-1 overflow-y-auto scrollbar-hide py-2 px-3 space-y-0.5">
           <NavItem
-            view={isAdmin ? ViewState.ADMIN : ViewState.DASHBOARD_HOME}
+            to={isAdmin ? '/admin' : '/dashboard'}
             icon={Home}
             label="Overview"
           />
@@ -115,23 +134,31 @@ export const Sidebar: React.FC<SidebarProps> = ({
           {isAdmin ? (
             <>
               <SectionHeader label="Administration" />
-              <NavItem view={ViewState.ADMIN_MEMBERS} icon={Users} label="Member Management" />
-              <NavItem view={ViewState.ADMIN_DONATION_WORK} icon={Heart} label="Donation Reports" />
-              <NavItem view={ViewState.ADMIN_EVENTS} icon={Calendar} label="Event Management" />
-              <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
-              <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events & Reunions" />
-              <NavItem view={ViewState.GALLERY} icon={Image} label="Gallery & Archive" />
-              <NavItem view={ViewState.DONATE} icon={HandHeart} label="Donations" />
+              <NavItem to="/admin/members" icon={Users} label="Member Management" />
+              <NavItem to="/admin/donations" icon={Heart} label="Donation Reports" />
+              <NavItem to="/admin/events" icon={Calendar} label="Event Management" />
+              <NavItem to="/admin/volunteers" icon={HandHeart} label="Volunteer Requests" />
+              
+              <SectionHeader label="Community" />
+              <NavItem to="/dashboard/directory" icon={Users} label="Directory" />
+              <NavItem to="/dashboard/events" icon={Calendar} label="Events & Reunions" />
+              <NavItem to="/dashboard/gallery" icon={Image} label="Gallery & Archive" />
+              <NavItem to="/dashboard/donate" icon={HandHeart} label="Donations" />
             </>
           ) : (
             <>
               <SectionHeader label="Community" />
-              <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
-              <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events" />
+              <NavItem to="/dashboard/directory" icon={Users} label="Directory" />
+              <NavItem to="/dashboard/events" icon={Calendar} label="Events" />
+              <NavItem to="/dashboard/gallery" icon={Image} label="Gallery" />
+              <NavItem to="/dashboard/stories" icon={BookOpen} label="Stories" />
+              <NavItem to="/dashboard/ai-assistant" icon={Sparkles} label="AI Assistant" />
 
               <SectionHeader label="Personal" />
-              <NavItem view={ViewState.PROFILE} icon={UserCircle} label="My Profile" />
-              <NavItem view={ViewState.MEMBERSHIP} icon={CreditCard} label="Membership" />
+              <NavItem to="/dashboard/profile" icon={UserCircle} label="My Profile" />
+              <NavItem to="/dashboard/membership" icon={CreditCard} label="Membership" />
+              <NavItem to="/dashboard/donate" icon={Heart} label="Donate" />
+              <NavItem to="/dashboard/volunteer" icon={HandHeart} label="Volunteer" />
             </>
           )}
         </div>
@@ -139,27 +166,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Footer / Profile Area */}
         <div className="p-3 border-t border-gray-100 bg-white">
            <div className="space-y-0.5 mb-3">
-             <NavItem icon={LogOut} label="Sign Out" onClick={onLogout} />
+             <NavItem icon={LogOut} label="Sign Out" isDanger />
            </div>
 
-           {!isCollapsed && !isAdmin && (
+           {!isCollapsed && !isAdmin && user && (
              <div className="flex items-center gap-3 px-2 py-2 rounded-lg bg-gray-50 border border-gray-100">
                <img
-                 src={currentUser.avatar}
+                 src={user.avatar}
                  alt="Profile"
                  className="w-8 h-8 rounded-full border border-gray-200 object-cover shadow-sm bg-white"
                />
                <div className="flex-1 min-w-0">
-                 <p className="text-sm font-semibold text-gray-900 truncate">{currentUser.name}</p>
-                 <p className="text-xs text-gray-500 truncate">Batch of {currentUser.batch}</p>
+                 <p className="text-sm font-semibold text-gray-900 truncate">{user.name}</p>
+                 <p className="text-xs text-gray-500 truncate">Batch of {user.batch}</p>
                </div>
              </div>
            )}
 
-           {isCollapsed && !isAdmin && (
+           {isCollapsed && !isAdmin && user && (
              <div className="flex justify-center pt-2 border-t border-gray-100">
                 <img
-                 src={currentUser.avatar}
+                 src={user.avatar}
                  alt="Profile"
                  className="w-8 h-8 rounded-full border border-gray-200 object-cover shadow-sm bg-white"
                />

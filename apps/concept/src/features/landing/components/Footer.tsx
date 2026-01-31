@@ -1,48 +1,32 @@
-import React, { memo, useCallback } from "react";
+import React, { memo } from "react";
+import { Link } from "react-router-dom";
 import { MapPin, Facebook, Linkedin, Youtube } from "lucide-react";
-import { ViewState } from "../../../shared/types";
 import { Credits } from "./Credits";
-import { Logo, Copyright } from "../../../shared/components";
+import { Logo } from "../../../shared/components";
 import { cn } from "../../../shared/lib/utils";
-
-interface FooterProps {
-  onNavigate: (view: ViewState) => void;
-  onLoginClick: () => void;
-  onAdminLogin: () => void;
-}
 
 // ============================================
 // Constants & Configuration
 // ============================================
 
-/**
- * Centralized style constants for maintainability.
- * Using 'as const' ensures type safety and prevents accidental mutations.
- */
 const STYLES = {
   footer: "bg-gradient-to-b from-brand-900 via-brand-950 to-black text-primary-foreground py-12 md:py-20 mt-auto",
   container: "max-w-7xl mx-auto px-4 md:px-6 lg:px-8",
 } as const;
 
-/**
- * Quick links configuration with proper type discrimination.
- * Using a union type with 'type' discriminator for type-safe handling.
- */
-type QuickLink =
-  | { type: "action"; label: string; action: "login" | "admin" }
-  | { type: "navigate"; label: string; view: ViewState };
+interface QuickLinkConfig {
+  to: string;
+  label: string;
+}
 
-const QUICK_LINKS: QuickLink[] = [
-  { type: "action", label: "Member Login", action: "login" },
-  { type: "action", label: "Admin Login", action: "admin" },
-  { type: "navigate", label: "Events", view: ViewState.EVENTS },
-  { type: "navigate", label: "Donate", view: ViewState.DONATE },
-  { type: "navigate", label: "Volunteer", view: ViewState.VOLUNTEER },
+const QUICK_LINKS: QuickLinkConfig[] = [
+  { to: "/login", label: "Member Login" },
+  { to: "/login?redirect=/admin", label: "Admin Login" },
+  { to: "/events", label: "Events" },
+  { to: "/donate", label: "Donate" },
+  { to: "/volunteer", label: "Volunteer" },
 ] as const;
 
-/**
- * Social links configuration with accessibility labels.
- */
 interface SocialLinkConfig {
   href: string;
   icon: React.ElementType;
@@ -67,10 +51,6 @@ interface SocialLinkProps {
   label: string;
 }
 
-/**
- * Memoized SocialLink component to prevent unnecessary re-renders.
- * Uses cn() utility for cleaner className composition.
- */
 const SocialLink = memo<SocialLinkProps>(({ href, icon: Icon, color, label }) => (
   <a
     href={href}
@@ -89,73 +69,11 @@ const SocialLink = memo<SocialLinkProps>(({ href, icon: Icon, color, label }) =>
 
 SocialLink.displayName = "SocialLink";
 
-interface FooterLinkProps {
-  onClick: () => void;
-  children: React.ReactNode;
-}
-
-/**
- * Memoized FooterLink component with proper button semantics.
- */
-const FooterLink = memo<FooterLinkProps>(({ onClick, children }) => (
-  <button
-    onClick={onClick}
-    className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground/50 rounded-sm cursor-pointer"
-  >
-    {children}
-  </button>
-));
-
-FooterLink.displayName = "FooterLink";
-
 // ============================================
 // Main Component
 // ============================================
 
-/**
- * Footer component - Main footer for the landing page.
- *
- * Performance optimizations:
- * - Wrapped with React.memo to prevent re-renders when props haven't changed
- * - useMemo for currentYear calculation
- * - useCallback for event handlers
- * - Sub-components are memoized
- *
- * Accessibility:
- * - Proper heading hierarchy
- * - ARIA labels for social links
- * - Focus indicators for interactive elements
- */
-export const Footer: React.FC<FooterProps> = memo(({
-  onNavigate,
-  onLoginClick,
-  onAdminLogin,
-}) => {
-
-
-  /**
-   * Type-safe handler for quick link clicks.
-   * Uses discriminated union pattern for exhaustiveness checking.
-   */
-  const handleQuickLinkClick = useCallback((link: QuickLink) => {
-    switch (link.type) {
-      case "action":
-        if (link.action === "login") {
-          onLoginClick();
-        } else {
-          onAdminLogin();
-        }
-        break;
-      case "navigate":
-        onNavigate(link.view);
-        break;
-      default:
-        // Exhaustiveness check - TypeScript will error if a case is missing
-        const _exhaustiveCheck: never = link;
-        console.error("Unhandled link type:", _exhaustiveCheck);
-    }
-  }, [onLoginClick, onAdminLogin, onNavigate]);
-
+export const Footer: React.FC = memo(() => {
   return (
     <footer className={STYLES.footer} role="contentinfo" aria-label="Site footer">
       <div className={STYLES.container}>
@@ -194,9 +112,12 @@ export const Footer: React.FC<FooterProps> = memo(({
             <ul className="space-y-4 text-primary-foreground/80 text-sm">
               {QUICK_LINKS.map((link) => (
                 <li key={link.label}>
-                  <FooterLink onClick={() => handleQuickLinkClick(link)}>
+                  <Link
+                    to={link.to}
+                    className="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground/50 rounded-sm"
+                  >
                     {link.label}
-                  </FooterLink>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -235,7 +156,9 @@ export const Footer: React.FC<FooterProps> = memo(({
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-primary-foreground/60 text-sm text-center md:text-left">
-          <Copyright className="text-primary-foreground/60 text-sm" />
+          <p className="font-bengali text-primary-foreground/60 text-sm">
+            © {new Date().getFullYear()} রায়গঞ্জ বিদ্যাচক্র প্রাক্তনী সমিতি
+          </p>
           <nav aria-label="Legal links" className="flex gap-8">
             <a
               href="#"

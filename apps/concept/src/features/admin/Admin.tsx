@@ -1,14 +1,13 @@
 import React from 'react';
-import { ViewState } from '../../shared/types';
+import { useNavigate } from 'react-router-dom';
 import { mockDonationStats, mockAdminMembers } from './data/mockReports';
+import { mockVolunteerRequests } from './data/mockVolunteerRequests';
 
-interface AdminProps {
-  onChangeView: (view: ViewState) => void;
-}
-
-export const Admin: React.FC<AdminProps> = ({ onChangeView }) => {
+export const Admin: React.FC = () => {
+  const navigate = useNavigate();
   const stats = mockDonationStats;
   const recentMembers = mockAdminMembers.slice(0, 3);
+  const pendingVolunteers = mockVolunteerRequests.filter(r => r.status === 'pending').length;
 
   return (
     <div className="space-y-6">
@@ -61,24 +60,33 @@ export const Admin: React.FC<AdminProps> = ({ onChangeView }) => {
           title="Donation Work Reports"
           description="Manage and post updates about fund utilization"
           icon="📝"
-          onClick={() => onChangeView(ViewState.ADMIN_DONATION_WORK)}
+          onClick={() => navigate('/admin/donations')}
           color="bg-blue-50 hover:bg-blue-100"
         />
         <QuickActionCard
           title="Member Management"
           description="Review and manage alumni member accounts"
           icon="👥"
-          onClick={() => onChangeView(ViewState.ADMIN_MEMBERS)}
+          onClick={() => navigate('/admin/members')}
           color="bg-purple-50 hover:bg-purple-100"
         />
         <QuickActionCard
           title="Event Management"
           description="Create and manage alumni events"
           icon="📅"
-          onClick={() => onChangeView(ViewState.ADMIN_EVENTS)}
+          onClick={() => navigate('/admin/events')}
           color="bg-orange-50 hover:bg-orange-100"
         />
       </div>
+
+      {/* Volunteer Quick Action */}
+      <QuickActionCard
+        title="Volunteer Requests"
+        description={`${pendingVolunteers} pending applications to review`}
+        icon="🤝"
+        onClick={() => navigate('/admin/volunteers')}
+        color="bg-green-50 hover:bg-green-100"
+      />
 
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -87,7 +95,7 @@ export const Admin: React.FC<AdminProps> = ({ onChangeView }) => {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold text-gray-900">Recent Members</h3>
             <button
-              onClick={() => onChangeView(ViewState.ADMIN_MEMBERS)}
+              onClick={() => navigate('/admin/members')}
               className="text-sm text-brand-600 hover:text-brand-700 font-medium"
             >
               View All
@@ -130,22 +138,28 @@ export const Admin: React.FC<AdminProps> = ({ onChangeView }) => {
               title="Review new member applications"
               count={3}
               urgent
-              onClick={() => onChangeView(ViewState.ADMIN_MEMBERS)}
+              onClick={() => navigate('/admin/members')}
+            />
+            <TaskItem
+              title="Review volunteer requests"
+              count={pendingVolunteers}
+              urgent={pendingVolunteers > 0}
+              onClick={() => navigate('/admin/volunteers')}
             />
             <TaskItem
               title="Update donation work reports"
               count={2}
-              onClick={() => onChangeView(ViewState.ADMIN_DONATION_WORK)}
+              onClick={() => navigate('/admin/donations')}
             />
             <TaskItem
               title="Approve event proposals"
               count={1}
-              onClick={() => onChangeView(ViewState.ADMIN_EVENTS)}
+              onClick={() => navigate('/admin/events')}
             />
             <TaskItem
               title="Monthly donation report"
               due="Due in 3 days"
-              onClick={() => onChangeView(ViewState.ADMIN_DONATION_WORK)}
+              onClick={() => navigate('/admin/donations')}
             />
           </div>
         </div>

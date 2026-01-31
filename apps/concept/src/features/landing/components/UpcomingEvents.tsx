@@ -1,11 +1,7 @@
 import React from 'react';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Reveal } from '../../../shared/components';
-import { ViewState } from '../../../shared/types';
-
-interface UpcomingEventsProps {
-  onNavigate: (view: ViewState) => void;
-}
 
 const EVENTS = [
   {
@@ -37,7 +33,7 @@ const EVENTS = [
   }
 ];
 
-export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ onNavigate }) => {
+export const UpcomingEvents: React.FC = () => {
   return (
     <section className="py-20 md:py-32 bg-white relative">
        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
@@ -47,12 +43,12 @@ export const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ onNavigate }) =>
             <p className="text-brand-600 font-medium">Don't miss the chance to reconnect.</p>
           </Reveal>
           <Reveal delay={100}>
-            <button 
-              onClick={() => onNavigate(ViewState.EVENTS)}
+            <Link
+              to="/events"
               className="text-gray-900 font-bold flex items-center gap-2 hover:gap-3 transition-all mt-4 md:mt-0"
             >
               View Full Calendar <ArrowRight className="w-5 h-5" />
-            </button>
+            </Link>
           </Reveal>
         </div>
 

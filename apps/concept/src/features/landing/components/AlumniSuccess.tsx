@@ -1,11 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Reveal } from '../../../shared/components';
-import { ViewState } from '../../../shared/types';
 import { Linkedin, ExternalLink } from 'lucide-react';
-
-interface AlumniSuccessProps {
-  onNavigate: (view: ViewState) => void;
-}
 
 const ALUMNI_DATA = [
   {
@@ -37,7 +33,7 @@ const ALUMNI_DATA = [
   },
 ];
 
-export const AlumniSuccess: React.FC<AlumniSuccessProps> = ({ onNavigate }) => {
+export const AlumniSuccess: React.FC = () => {
   return (
     <section className="py-20 md:py-32 bg-stone-900 text-white relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
@@ -52,12 +48,12 @@ export const AlumniSuccess: React.FC<AlumniSuccessProps> = ({ onNavigate }) => {
           </Reveal>
           
           <Reveal delay={200}>
-            <button 
-              onClick={() => onNavigate(ViewState.DIRECTORY)}
+            <Link
+              to="/dashboard/directory"
               className="px-6 py-3 border border-brand-700 hover:bg-brand-900 rounded-full text-brand-300 font-medium transition-colors flex items-center gap-2"
             >
               View All Alumni <ExternalLink className="w-4 h-4" />
-            </button>
+            </Link>
           </Reveal>
         </div>
 

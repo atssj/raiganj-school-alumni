@@ -1,13 +1,9 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Reveal } from '../../../shared/components';
-import { ViewState } from '../../../shared/types';
 
-interface JoinCTAProps {
-  onNavigate: (view: ViewState) => void;
-}
-
-export const JoinCTA: React.FC<JoinCTAProps> = ({ onNavigate }) => {
+export const JoinCTA: React.FC = () => {
   return (
     <section className="py-24 relative overflow-hidden bg-brand-900 text-white">
       {/* Background Gradients */}
@@ -34,18 +30,18 @@ export const JoinCTA: React.FC<JoinCTAProps> = ({ onNavigate }) => {
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-            <button 
-              onClick={() => onNavigate(ViewState.MEMBERSHIP)}
-              className="px-8 py-4 bg-white text-brand-900 rounded-full font-bold text-lg hover:bg-brand-50 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 w-full md:w-auto"
+            <Link
+              to="/dashboard/membership"
+              className="px-8 py-4 bg-white text-brand-900 rounded-full font-bold text-lg hover:bg-brand-50 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 w-full md:w-auto text-center"
             >
               Join the Network
-            </button>
-            <button 
-              onClick={() => onNavigate(ViewState.GALLERY)}
-              className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all w-full md:w-auto backdrop-blur"
+            </Link>
+            <Link
+              to="/gallery"
+              className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full font-bold text-lg hover:bg-white/10 transition-all w-full md:w-auto backdrop-blur text-center"
             >
               Explore Gallery
-            </button>
+            </Link>
           </div>
         </Reveal>
       </div>

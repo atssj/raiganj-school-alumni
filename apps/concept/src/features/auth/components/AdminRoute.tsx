@@ -1,2 +1,1 @@
-export { LoginModal } from './LoginModal';
 export { ProtectedRoute, AdminRoute, useAuth, AuthProvider } from './ProtectedRoute';

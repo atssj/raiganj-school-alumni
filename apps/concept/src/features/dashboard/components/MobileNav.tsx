@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Home,
   Users,
@@ -9,13 +10,12 @@ import {
   HandHeart,
   Image,
   UserCircle,
+  BookOpen,
+  Sparkles,
 } from 'lucide-react';
-import { ViewState } from '../../../shared/types';
 import { Button } from '../../../shared/components';
 
 interface MobileNavProps {
-  currentView: ViewState;
-  onChangeView: (view: ViewState) => void;
   onLogout: () => void;
   isOpen: boolean;
   onClose: () => void;
@@ -23,38 +23,40 @@ interface MobileNavProps {
 }
 
 export const MobileNav: React.FC<MobileNavProps> = ({
-  currentView,
-  onChangeView,
   onLogout,
   isOpen,
   onClose,
   isAdmin,
 }) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   const NavItem = ({
-    view,
+    to,
     icon: Icon,
     label,
   }: {
-    view: ViewState;
+    to: string;
     icon: React.ElementType;
     label: string;
-  }) => (
-    <Button
-      variant={currentView === view ? 'default' : 'ghost'}
-      onClick={() => {
-        onChangeView(view);
-        onClose();
-      }}
-      className={`w-full justify-start gap-3 px-4 py-3 h-auto text-base font-medium ${
-        currentView === view ? 'shadow-sm' : 'text-gray-600 hover:text-gray-900'
-      }`}
-    >
-      <Icon
-        className={`w-5 h-5 mr-2 ${currentView === view ? 'text-current' : 'text-gray-400'}`}
-      />
-      {label}
-    </Button>
-  );
+  }) => {
+    const isActive = currentPath === to || currentPath.startsWith(to + '/');
+    
+    return (
+      <Link
+        to={to}
+        onClick={onClose}
+        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-all ${
+          isActive
+            ? 'bg-brand-600 text-white shadow-sm'
+            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+        }`}
+      >
+        <Icon className={`w-5 h-5 ${isActive ? 'text-current' : 'text-gray-400'}`} />
+        {label}
+      </Link>
+    );
+  };
 
   if (!isOpen) return null;
 
@@ -65,7 +67,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
         <div className="flex-1 overflow-y-auto p-4">
           <nav className="space-y-1">
             <NavItem
-              view={isAdmin ? ViewState.ADMIN : ViewState.DASHBOARD_HOME}
+              to={isAdmin ? '/admin' : '/dashboard'}
               icon={Home}
               label="Overview"
             />
@@ -77,13 +79,20 @@ export const MobileNav: React.FC<MobileNavProps> = ({
                     Administration
                   </p>
                 </div>
-                <NavItem view={ViewState.ADMIN_MEMBERS} icon={Users} label="Member Management" />
-                <NavItem view={ViewState.ADMIN_DONATION_WORK} icon={Heart} label="Donation Reports" />
-                <NavItem view={ViewState.ADMIN_EVENTS} icon={Calendar} label="Event Management" />
-                <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
-                <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events & Reunions" />
-                <NavItem view={ViewState.GALLERY} icon={Image} label="Gallery & Archive" />
-                <NavItem view={ViewState.DONATE} icon={HandHeart} label="Donations" />
+                <NavItem to="/admin/members" icon={Users} label="Member Management" />
+                <NavItem to="/admin/donations" icon={Heart} label="Donation Reports" />
+                <NavItem to="/admin/events" icon={Calendar} label="Event Management" />
+                <NavItem to="/admin/volunteers" icon={HandHeart} label="Volunteer Requests" />
+                
+                <div className="pt-6 pb-2 px-4">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    Community
+                  </p>
+                </div>
+                <NavItem to="/dashboard/directory" icon={Users} label="Directory" />
+                <NavItem to="/dashboard/events" icon={Calendar} label="Events & Reunions" />
+                <NavItem to="/dashboard/gallery" icon={Image} label="Gallery & Archive" />
+                <NavItem to="/dashboard/donate" icon={HandHeart} label="Donations" />
               </>
             ) : (
               <>
@@ -92,14 +101,19 @@ export const MobileNav: React.FC<MobileNavProps> = ({
                     Community
                   </p>
                 </div>
-                <NavItem view={ViewState.DIRECTORY} icon={Users} label="Directory" />
-                <NavItem view={ViewState.EVENTS} icon={Calendar} label="Events" />
+                <NavItem to="/dashboard/directory" icon={Users} label="Directory" />
+                <NavItem to="/dashboard/events" icon={Calendar} label="Events" />
+                <NavItem to="/dashboard/gallery" icon={Image} label="Gallery" />
+                <NavItem to="/dashboard/stories" icon={BookOpen} label="Stories" />
+                <NavItem to="/dashboard/ai-assistant" icon={Sparkles} label="AI Assistant" />
 
                 <div className="pt-6 pb-2 px-4">
                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Personal</p>
                 </div>
-                <NavItem view={ViewState.PROFILE} icon={UserCircle} label="My Profile" />
-                <NavItem view={ViewState.MEMBERSHIP} icon={CreditCard} label="Membership" />
+                <NavItem to="/dashboard/profile" icon={UserCircle} label="My Profile" />
+                <NavItem to="/dashboard/membership" icon={CreditCard} label="Membership" />
+                <NavItem to="/dashboard/donate" icon={Heart} label="Donate" />
+                <NavItem to="/dashboard/volunteer" icon={HandHeart} label="Volunteer" />
               </>
             )}
           </nav>

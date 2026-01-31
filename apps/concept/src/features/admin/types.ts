@@ -33,3 +33,17 @@ export interface AdminMember {
   lastLogin: string;
   donationAmount: number;
 }
+
+export interface VolunteerRequest {
+  id: string;
+  applicantName: string;
+  email: string;
+  phone: string;
+  batch: number;
+  roleId: 'mentor' | 'speaker' | 'organizer' | 'content';
+  roleTitle: string;
+  message: string;
+  status: 'pending' | 'approved' | 'rejected';
+  submittedAt: string;
+  reviewedAt?: string;
+}

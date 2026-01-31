@@ -1,15 +1,10 @@
 import React from 'react';
 import { ArrowRight, Play, MapPin } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { ViewState } from '../../../shared/types';
-import { Button } from '../../../shared/components/ui/button';
+import { Link } from 'react-router-dom';
 import { HeroStats } from './HeroStats';
 
-interface HeroProps {
-  onNavigate: (view: ViewState) => void;
-}
-
-export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
+export const Hero: React.FC = () => {
   const containerRef = React.useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
   
@@ -93,24 +88,22 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5 items-start">
-              <Button
-                size="lg"
-                onClick={() => onNavigate(ViewState.DIRECTORY)}
-                className="group rounded-full px-8 md:px-10 h-14 text-lg bg-blue-600 text-white hover:bg-blue-700 border-none shadow-xl shadow-brand-900/30 transition-all duration-300"
+              <Link
+                to="/dashboard/directory"
+                className="group inline-flex items-center rounded-full px-8 md:px-10 h-14 text-lg bg-blue-600 text-white hover:bg-blue-700 border-none shadow-xl shadow-brand-900/30 transition-all duration-300"
               >
                 Find Your Batch
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                size="lg"
-                onClick={() => onNavigate(ViewState.STORIES)}
-                className="group rounded-full px-8 md:px-10 h-14 text-lg bg-white/10 border border-white/10 text-white hover:bg-white/20 hover:border-white/20 hover:text-white backdrop-blur-md transition-all duration-300"
+              </Link>
+              <Link
+                to="/stories"
+                className="group inline-flex items-center rounded-full px-8 md:px-10 h-14 text-lg bg-white/10 border border-white/10 text-white hover:bg-white/20 hover:border-white/20 hover:text-white backdrop-blur-md transition-all duration-300"
               >
                 <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-3 group-hover:bg-white/30 text-white transition-colors">
-                  <Play className="w-3 h-3 fill-current ml-0.5" /> 
+                  <Play className="w-3 h-3 fill-current ml-0.5" />
                 </div>
                 Watch Stories
-              </Button>
+              </Link>
             </div>
             
           {/* Location Badge */}

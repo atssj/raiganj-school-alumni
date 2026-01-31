@@ -1,13 +1,9 @@
 import React from 'react';
 import { Award, BookOpen, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Reveal } from '../../../shared/components';
-import { ViewState } from '../../../shared/types';
 
-interface SchoolHistoryProps {
-  onNavigate: (view: ViewState) => void;
-}
-
-export const SchoolHistory: React.FC<SchoolHistoryProps> = ({ onNavigate }) => {
+export const SchoolHistory: React.FC = () => {
   return (
     <section className="py-20 md:py-32 bg-[#FDFBF7] relative overflow-hidden">
       {/* Background Creative Elements */}
@@ -88,30 +84,28 @@ export const SchoolHistory: React.FC<SchoolHistoryProps> = ({ onNavigate }) => {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                <FeatureItem 
-                  icon={BookOpen} 
-                  title="Academic Excellence" 
+                <FeatureItem
+                  icon={BookOpen}
+                  title="Academic Excellence"
                   text="Top-ranking in district boards consistently."
-                  delay={100}
                 />
-                <FeatureItem 
-                  icon={Users} 
-                  title="Global Community" 
+                <FeatureItem
+                  icon={Users}
+                  title="Global Community"
                   text="Alumni spread across 30+ countries."
-                  delay={200}
                 />
               </div>
 
-              <button 
-                onClick={() => onNavigate(ViewState.ABOUT)}
-                className="group relative px-8 py-4 bg-brand-900 text-white rounded-xl font-medium overflow-hidden shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1"
+              <Link
+                to="/about"
+                className="group relative inline-flex items-center gap-2 px-8 py-4 bg-brand-900 text-white rounded-xl font-medium overflow-hidden shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-1"
               >
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-brand-800 to-brand-700 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="relative flex items-center gap-2">
-                   Explore Our History 
+                   Explore Our History
                    <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </span>
-              </button>
+              </Link>
             </Reveal>
           </div>
         </div>
@@ -120,7 +114,7 @@ export const SchoolHistory: React.FC<SchoolHistoryProps> = ({ onNavigate }) => {
   );
 };
 
-const FeatureItem = ({ icon: Icon, title, text, delay }: { icon: any, title: string, text: string, delay?: number }) => (
+const FeatureItem = ({ icon: Icon, title, text }: { icon: any, title: string, text: string }) => (
   <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-gray-100">
     <div className="p-3 bg-white border border-gray-100 shadow-sm rounded-xl text-brand-600 group-hover:bg-brand-50 transition-colors">
       <Icon className="w-5 h-5" />
