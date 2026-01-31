@@ -3,6 +3,7 @@ import { ArrowRight, Play, MapPin } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { HeroStats } from './HeroStats';
+import { HeroVideo } from './HeroVideo';
 
 export const Hero: React.FC = () => {
   const containerRef = React.useRef<HTMLElement>(null);
@@ -44,18 +45,16 @@ export const Hero: React.FC = () => {
       onMouseLeave={handleMouseLeave}
       className="relative min-h-dvh w-full flex items-center overflow-hidden pt-20 pb-28 md:pb-32 perspective-1000 bg-brand-950"
     >
-      {/* Background w/ Parallax - Now Offset to Right */}
-      <motion.div 
+      {/* Background w/ Parallax - HeroVideo with Cloudinary */}
+      <motion.div
         style={{ y: yBg, rotateX: springRotateX, rotateY: springRotateY, scale: 1.05, willChange: 'transform' }}
         className="absolute right-0 top-0 bottom-0 w-full md:w-[60%] z-0 origin-center opacity-40 md:opacity-100 transform-gpu"
       >
-        <img
-          src="/hero-image.jpg"
-          className="w-full h-full object-cover object-center"
-          alt="Raiganj Vidya Chakra School Sketch"
-          fetchPriority="high"
-          loading="eager"
-          decoding="async"
+        <HeroVideo
+          cloudName="donrm4btg"
+          videoPublicId="hero-video_oeelgx"
+          posterPublicId="hero-video-poster_kczfnc"
+          className="w-full h-full"
         />
         {/* Gradient Overlay for blending into solid color */}
         <div className="absolute inset-0 bg-linear-to-r from-brand-950 via-transparent to-transparent" />

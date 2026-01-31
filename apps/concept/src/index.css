@@ -187,3 +187,9 @@
 .font-bengali {
   font-family: 'Noto Serif Bengali', serif;
 }
+
+/* Hero Video GPU acceleration styles */
+.hero-video-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}

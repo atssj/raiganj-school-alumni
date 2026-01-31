@@ -16,3 +16,4 @@ export * from './JoinCTA';
 export { Credits } from './Credits';
 export * from './GalleryPreview';
 export * from './FundUtilizationPreview';
+export * from './HeroVideo';
