@@ -21,7 +21,7 @@ export const Credits: React.FC<CreditsProps> = ({ className }) => {
       )}
     >
       {/* Decorative background glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-500/5 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-r from-transparent via-brand-500/5 to-transparent blur-3xl pointer-events-none" />
 
       {/* Main Content Group */}
       <div className="group relative flex flex-col items-center gap-3 z-10 cursor-default">
@@ -39,10 +39,10 @@ export const Credits: React.FC<CreditsProps> = ({ className }) => {
         {/* Name & Team */}
         <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
           <motion.a
-            href="https://linkedin.com" // Replace with specific LinkedIn URL
+            href="https://www.linkedin.com/in/subhajitsaha1?utm_source=raiganj-alumni&utm_medium=footer-credits&utm_campaign=profile-visit&utm_content=credit-component"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:shadow-[0_0_20px_-5px_rgba(10,102,194,0.5)] overflow-hidden min-w-[160px]"
+            className="relative flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:shadow-[0_0_20px_-5px_rgba(10,102,194,0.5)] overflow-hidden min-w-40"
             whileHover="hover"
             initial="initial"
             whileTap={{ scale: 0.95 }}
@@ -55,7 +55,7 @@ export const Credits: React.FC<CreditsProps> = ({ className }) => {
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent font-bold text-sm tracking-wide">
+              <span className="bg-linear-to-r from-white via-white to-white/70 bg-clip-text text-transparent font-bold text-sm tracking-wide">
                 Subhajit Saha
               </span>
               <div className="w-1 h-1 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.8)]" />
